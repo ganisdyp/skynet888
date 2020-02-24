@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="54" height="54" viewBox="0 0 54 54">
+  <g id="droplet-outline" transform="translate(0.002)">
+    <g id="droplet-outline-2" data-name="droplet-outline" transform="translate(-0.002 0.001)">
+      <rect id="Rectangle_100" data-name="Rectangle 100" width="53.553" height="53.553" transform="translate(0.449) rotate(0.48)" fill="#fff" opacity="0"/>
+      <path id="Path_227" data-name="Path 227" d="M21.13,43.265A16.512,16.512,0,0,1,9.349,38.178a17.249,17.249,0,0,1,.223-24.032L19.926,3.77A2.1,2.1,0,0,1,21.51,3.1a2.231,2.231,0,0,1,1.584.692L33.269,14.324a17.249,17.249,0,0,1-.2,24.032A16.356,16.356,0,0,1,21.13,43.265Zm.29-34.743L12.74,17.27a12.808,12.808,0,0,0-.156,17.851,12.043,12.043,0,0,0,17.249.089,12.764,12.764,0,0,0,.134-17.851Z" transform="translate(5.651 3.815)" fill="#fff"/>
+    </g>
+  </g>
+</svg>

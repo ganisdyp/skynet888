@@ -1,0 +1,11 @@
+AddDefaultCharset UTF-8
+<IfModule mod_rewrite.c>
+    Options FollowSymlinks
+    RewriteEngine on
+# Redirect to www
+RewriteCond %{HTTP_HOST} ^[^.]+\.[^.]+$
+RewriteCond %{HTTPS}s ^on(s)|
+RewriteRule ^ http%1://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    RewriteRule ^$ frontend/web/            [L]
+    RewriteRule ^(.+)?$ frontend/web/$1     [L]
+</IfModule>
