@@ -2,9 +2,8 @@
 namespace frontend\models;
 use Yii;
 use yii\base\Model;
-use common\models\BrandSearch;
-use common\models\ProductTypeSearch;
-use common\models\BlogtypeSearch;
+use common\models\ProjectSearch;
+use common\models\CharacterTypeSearch;
 
 class DC extends Model {
   public static function get_menu() {
@@ -25,10 +24,10 @@ class DC extends Model {
         'pagename' => 'services',
       ),
       array(
-        'text' => Yii::t('common', 'Product'),
-        'link' => Yii::$app->request->BaseUrl.'/site/product-category',
-        'pagename' => 'product',
-        // 'subpage' => self::get_menu_product(),
+        'text' => Yii::t('common', 'Character'),
+        'link' => Yii::$app->request->BaseUrl.'/site/character-category',
+        'pagename' => 'character',
+        // 'subpage' => self::get_menu_character(),
       ),
       array(
         'text' => Yii::t('common', 'Blogs'),
@@ -46,19 +45,19 @@ class DC extends Model {
       return $menu;
   }
 
-  public static function get_menu_brands() {
+  public static function get_menu_projects() {
       $searchModel = new BrandSearch();
       $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-      $brands = $dataProvider->query->where(['<>','code', '--'])->orderBy(['code'=>SORT_ASC])->all();
+      $projects = $dataProvider->query->where(['<>','code', '--'])->orderBy(['code'=>SORT_ASC])->all();
       $menu = array();
-      foreach($brands as $brand){
+      foreach($projects as $project){
           $arr_detail = array(
-              'id' => $brand->id,
-              'text' => $brand->name,
-              'code' => $brand->code,
-              'link' => Yii::$app->request->BaseUrl.'/site/product-category?id='.$brand->id,
-              'main_photo' => $brand->main_photo,
-              'pagename' => 'brand'
+              'id' => $project->id,
+              'text' => $project->name,
+              'code' => $project->code,
+              'link' => Yii::$app->request->BaseUrl.'/site/character-category?id='.$project->id,
+              'main_photo' => $project->main_photo,
+              'pagename' => 'project'
           );
           array_push($menu,$arr_detail);
       }
@@ -66,17 +65,17 @@ class DC extends Model {
       return $menu;
   }
 
-  public static function get_menu_product() {
-      $searchModel = new ProductTypeSearch();
+  public static function get_menu_character() {
+      $searchModel = new CharacterTypeSearch();
       $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-      $product_category = $dataProvider->query->all();
+      $character_category = $dataProvider->query->all();
       $menu = array();
-      foreach($product_category as $category){
+      foreach($character_category as $category){
           $arr_detail = array(
               'text' => $category->name,
-              'link' => Yii::$app->request->BaseUrl.'/site/product-list?id='.$category->id,
+              'link' => Yii::$app->request->BaseUrl.'/site/character-list?id='.$category->id,
               'main_photo' => $category->main_photo,
-              'pagename' => 'product'
+              'pagename' => 'character'
           );
           array_push($menu,$arr_detail);
       }

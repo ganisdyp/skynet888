@@ -79,7 +79,7 @@ class Blog extends \yii\db\ActiveRecord
             'date_published' => Yii::t('common', 'Date Published'),
             'main_photo' => Yii::t('common', 'Main Photo'),
             'keyword' => Yii::t('common', 'Keyword'),
-          //  'brand_id' =>  Yii::t('common', 'Brand ID'),
+          //  'project_id' =>  Yii::t('common', 'Project ID'),
         ];
     }
 

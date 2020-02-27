@@ -6,7 +6,7 @@ return [
         '@npm' => '@vendor/npm-asset',
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
-    'name' => 'Safebox Siam',
+    'name' => 'Skynet888 Studio',
     'modules' => [
         'stat' => [
             'class' => akiraz2\stat\Module::class,

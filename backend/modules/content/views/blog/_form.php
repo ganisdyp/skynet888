@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\BlogtypeLang;
 use common\models\BlogPhoto;
-use common\models\BrandLang;
+use common\models\ProjectLang;
 use yii\helpers\ArrayHelper;
 use kartik\date\DatePicker;
 use kartik\file\FileInput;

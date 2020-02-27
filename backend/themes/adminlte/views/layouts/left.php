@@ -3,9 +3,9 @@
     <section class="sidebar">
 
         <!-- Sidebar user panel -->
-       <!-- <div class="user-panel">
+        <!-- <div class="user-panel">
             <div class="pull-left image">
-                <img src="<?/*= $directoryAsset */?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
+                <img src="<? /*= $directoryAsset */ ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
                 <p>Alexander Pierce</p>
@@ -15,15 +15,15 @@
         </div>-->
 
         <!-- search form -->
-       <!-- <form action="#" method="get" class="sidebar-form">
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search..."/>
-                <span class="input-group-btn">
-                <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-        </form>-->
+        <!-- <form action="#" method="get" class="sidebar-form">
+             <div class="input-group">
+                 <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                 <span class="input-group-btn">
+                 <button type='submit' name='search' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i>
+                 </button>
+               </span>
+             </div>
+         </form>-->
         <!-- /.search form -->
 
         <?= dmstr\widgets\Menu::widget(
@@ -33,40 +33,48 @@
                     ['label' => 'Menu for Admin', 'options' => ['class' => 'header']],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
-                            'active'=>true,
+                        'active' => true,
                         'label' => 'Content Management',
-                        'icon' => 'edit',
+                        'icon' => 'x',
                         'url' => '#',
                         'items' => [
                             [
-                                'label' => 'Brands',
-                                'icon' => 'pencil',
+                                'label' => 'About Us',
+                                'icon' => 'commenting',
+                                'url' => ['/content/about/index'],
+
+                            ],
+                            [
+                                'active' => true,
+                                'label' => 'Projects',
+                                'icon' => 'file-o',
                                 'url' => '#',
                                 'items' => [
-                                    ['label' => 'Manage brand', 'icon' => 'reorder', 'url' => Yii::$app->getHomeUrl().'content/brand/index',],
+                                    ['label' => 'Manage project', 'icon' => 'reorder', 'url' => Yii::$app->getHomeUrl() . 'content/project/index'],
+                                        ['label' => 'Story', 'icon' => 'file', 'url' => Yii::$app->getHomeUrl() . 'content/story/index'],
+                                    ['label' => 'Characters', 'icon' => 'group', 'url' => Yii::$app->getHomeUrl() . 'content/character/index'],
+                                    ['label' => 'Environment', 'icon' => 'envira', 'url' => Yii::$app->getHomeUrl() . 'content/environment/index'],
+                                    ['label' => 'Movie / Trailor', 'icon' => 'file-video-o', 'url' => Yii::$app->getHomeUrl() . 'content/movie/index'],
+                                      ['label' => 'Screenshot', 'icon' => 'picture-o', 'url' => Yii::$app->getHomeUrl() . 'content/screenshot/index']
                                 ],
                             ],
                             [
-                                    'active' => true,
-                                'label' => 'Products',
-                                'icon' => 'file-photo-o',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Product categories', 'icon' => 'plus', 'url' => Yii::$app->getHomeUrl().'content/producttype/index',],
-                                    ['label' => 'Manage products', 'icon' => 'th-large', 'url' => Yii::$app->getHomeUrl().'content/product/index',],
-                                    //  ['label' => 'Manage product profiles', 'icon' => 'circle-o', 'url' => '#',],
-                                ],
-                            ],
-                            [
-                                    'active'=>true,
-                                'label' => 'Blogs',
+                                'active' => true,
+                                'label' => 'News',
                                 'icon' => 'bullhorn',
-                                'url' => '#',
-                                'items' => [
-                                    ['label' => 'Blog categories', 'icon' => 'plus', 'url' => Yii::$app->getHomeUrl().'content/blogtype/index',],
-                                    ['label' => 'Manage blogs', 'icon' => 'th-large', 'url' => Yii::$app->getHomeUrl().'content/blog/index',],
-                                    // ['label' => 'Manage activites photos', 'icon' => 'circle-o', 'url' => '#',],
-                                ],
+                                'url' => Yii::$app->getHomeUrl() . 'content/blog/index',
+                            ],
+                            [
+                                'label' => 'Career',
+                                'icon' => 'pencil-square-o',
+                                'url' => ['/content/career/index'],
+
+                            ],
+                            [
+                                'label' => 'Contact',
+                                'icon' => 'phone-square',
+                                'url' => ['/content/about/index'],
+
                             ],
                         ],
                     ],

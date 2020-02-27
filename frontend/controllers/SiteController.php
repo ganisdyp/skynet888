@@ -167,7 +167,7 @@ class SiteController extends Controller
             if ($model->sendEmail('safeboxsiam@gmail.com') && $model->sendEmail('info@safeboxasia.com')) {
          //   if ($model->sendEmail('ganis.dyp@gmail.com')) {
                 Yii::$app->session->setFlash('successEnquiry');
-                return $this->redirect('product-view?id='.$model->product_id);
+                return $this->redirect('character-view?id='.$model->character_id);
             } else {
                 Yii::$app->session->setFlash('errorEnquiry');
                 return $this->refresh();
@@ -175,7 +175,7 @@ class SiteController extends Controller
         } else {
             return $this->render('enquiry', [
                 'model' => $model,
-                'product_id' => Yii::$app->request->get('product_id')
+                'character_id' => Yii::$app->request->get('character_id')
             ]);
         }
     }
@@ -200,41 +200,41 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays product categories page.
+     * Displays character categories page.
      *
      * @return mixed
      */
-    public function actionProductCategory()
+    public function actionCharacterCategory()
     {
-        return $this->render('productCategory');
+        return $this->render('characterCategory');
     }
 
     /**
-     * Displays product list page.
+     * Displays character list page.
      *
      * @return mixed
      */
-    public function actionProductList()
+    public function actionCharacterList()
     {
-        return $this->render('productList');
+        return $this->render('characterList');
     }
 
     /**
-     * Displays product view page.
+     * Displays character view page.
      *
      * @return mixed
      */
-    public function actionProductModel()
+    public function actionCharacterModel()
     {
-        return $this->render('productModel');
+        return $this->render('characterModel');
     }
 
     /**
-     * Displays product view page.
+     * Displays character view page.
      *
      * @return mixed
      */
-    public function actionProductView()
+    public function actionCharacterView()
     {
         return $this->render('productView');
     }

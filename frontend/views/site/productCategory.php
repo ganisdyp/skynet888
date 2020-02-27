@@ -4,48 +4,48 @@
 
 use yii\helpers\Html;
 use frontend\models\DC;
-use common\models\ProductTypeSearch;
-use common\models\ProductSearch;
-use common\models\BrandSearch;
+use common\models\CharacterTypeSearch;
+use common\models\CharacterSearch;
+use common\models\ProjectSearch;
 
-define('PAGE_NAME', 'product');
-$this->title = Yii::t('common', 'Product');
+define('PAGE_NAME', 'character');
+$this->title = Yii::t('common', 'Character');
 $this->params['breadcrumbs'][] = $this->title;
 
-$brands = DC::get_menu_brands();
+$projects = DC::get_menu_projects();
 
-$searchModel = new ProductTypeSearch();
+$searchModel = new CharacterTypeSearch();
 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-$product_categories = $dataProvider->getModels();
+$character_categories = $dataProvider->getModels();
 
-$searchModel_product = new ProductSearch();
-$dataProvider_product = $searchModel_product->search(Yii::$app->request->queryParams);
+$searchModel_character = new CharacterSearch();
+$dataProvider_character = $searchModel_character->search(Yii::$app->request->queryParams);
 
-$searchModel_brand = new BrandSearch();
-$dataProvider_brand = $searchModel_brand->search(Yii::$app->request->queryParams);
+$searchModel_project = new ProjectSearch();
+$dataProvider_project = $searchModel_project->search(Yii::$app->request->queryParams);
 
-$brand_id = 0;
-$product_list = [];
+$project_id = 0;
+$character_list = [];
 $category_list = [];
 if (isset($_GET['id']) && trim($_GET['id']) != '') {
-    $brand_id = $_GET['id'];
-    /**  Find category from brand */
-    $category_list = $dataProvider_product->query->leftJoin('product_type_lang','product.product_type_id = product_type_lang.product_type_id AND product_type_lang.language = \'en\'')->where(['brand_id' => $brand_id])->groupBy('product_type_id')->orderBy(['product_type_lang.name' => SORT_ASC])->all();
-    $selected_brand = $dataProvider_brand->query->where(['id' => $brand_id])->one();
+    $project_id = $_GET['id'];
+    /**  Find category from project */
+    $category_list = $dataProvider_character->query->leftJoin('character_type_lang','character.character_type_id = character_type_lang.character_type_id AND character_type_lang.language = \'en\'')->where(['project_id' => $project_id])->groupBy('character_type_id')->orderBy(['character_type_lang.name' => SORT_ASC])->all();
+    $selected_project = $dataProvider_project->query->where(['id' => $project_id])->one();
 
 } else {
-    $selected_brand = null;
-    $category_list = $dataProvider_product->query->leftJoin('product_type_lang','product.product_type_id = product_type_lang.product_type_id AND product_type_lang.language = \'en\'')->where([])->groupBy('product_type_id')->orderBy(['brand_id'=> SORT_ASC,'product_type_lang.name' => SORT_ASC])->all();
+    $selected_project = null;
+    $category_list = $dataProvider_character->query->leftJoin('character_type_lang','character.character_type_id = character_type_lang.character_type_id AND character_type_lang.language = \'en\'')->where([])->groupBy('character_type_id')->orderBy(['project_id'=> SORT_ASC,'character_type_lang.name' => SORT_ASC])->all();
 }
 ?>
-<div id="product-page" class="container">
+<div id="character-page" class="container">
     <?php /*
   <div class="page-header has-right-content fadeIn animated d03s" style="background-image: url(http://smartyschool.stylemixthemes.com/university/wp-content/uploads/2016/09/bg-shop.jpg);">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 col-12 align-self-center">
           <div class="header-content">
-            <p class="title h3 bold text-uppercase">Product</p>
+            <p class="title h3 bold text-uppercase">Character</p>
             <p class="mb-lg-0 mb-2">Lorem ipsum dolor sit amet</p>
           </div>
         </div>
@@ -63,19 +63,19 @@ venenatis et at orci.</p>
   */ ?>
     <nav class="mt-2 fadeIn animated d07s">
         <ol class="breadcrumb smaller-90">
-            <?php if ($brand_id == 0) { ?>
+            <?php if ($project_id == 0) { ?>
                 <li class="breadcrumb-item"><a
                             href="<?php echo Yii::$app->request->BaseUrl . '/site/index'; ?>"><?php echo Yii::t('common', 'Home'); ?></a>
                 </li>
-                <li class="breadcrumb-item active"><?php echo Yii::t('common', 'Product'); ?></li>
+                <li class="breadcrumb-item active"><?php echo Yii::t('common', 'Character'); ?></li>
             <?php } else { ?>
                 <li class="breadcrumb-item"><a
                             href="<?php echo Yii::$app->request->BaseUrl . '/site/index'; ?>"><?php echo Yii::t('common', 'Home'); ?></a>
                 </li>
                 <li class="breadcrumb-item bold"><a
-                            href="<?php echo Yii::$app->request->BaseUrl . '/site/product-category'; ?>"><?php echo Yii::t('common', 'Product'); ?></a>
+                            href="<?php echo Yii::$app->request->BaseUrl . '/site/product-category'; ?>"><?php echo Yii::t('common', 'Character'); ?></a>
                 </li>
-                <li class="breadcrumb-item active"><?php echo $selected_brand->name; ?></li>
+                <li class="breadcrumb-item active"><?php echo $selected_project->name; ?></li>
             <?php } ?>
         </ol>
     </nav>
@@ -83,15 +83,15 @@ venenatis et at orci.</p>
         <div class="col-lg-3">
             <div class="card product-category">
                 <div class="card-header text-center bold">
-                    Product Brands
+                    Character Projects
                 </div>
                 <div class="card-body">
                     <ul>
-                        <li class="<?php echo ($brand_id == 0) ? 'active' : ''; ?>">
+                        <li class="<?php echo ($project_id == 0) ? 'active' : ''; ?>">
                             <a href="<?php echo Yii::$app->request->BaseUrl . '/site/product-category'; ?>">All</a>
                         </li>
-                        <?php foreach ($brands as $cate) {
-                            $selected = ($brand_id == $cate["id"]) ? 'active' : '';
+                        <?php foreach ($projects as $cate) {
+                            $selected = ($project_id == $cate["id"]) ? 'active' : '';
                             echo '<li class="' . $selected . '">
                   <a href="' . Yii::$app->request->BaseUrl . '/site/product-category?id=' . $cate["id"] . '">' . $cate["text"] . '</a>
                   </li>';

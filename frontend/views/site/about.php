@@ -101,7 +101,7 @@ define('PAGE_NAME', 'about');
     <div class="row justify-content-center py-5">
       <div class="col-12">
         <div class="section-title text-center mt-3 viewpoint-animate d03s" data-animation="fadeInDown">
-          <span class="product-tag bg-blue-light"><?php echo Yii::t('common', 'tag_unique_selling'); ?></span>
+          <span class="character-tag bg-blue-light"><?php echo Yii::t('common', 'tag_unique_selling'); ?></span>
           <h2 class="letter-spacing-1 font-playfair mt-3"><?php echo Yii::t('common', 'why_us'); ?></h2>
           <hr class="mx-auto">
         </div>

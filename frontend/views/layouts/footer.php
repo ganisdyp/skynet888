@@ -4,7 +4,7 @@ use frontend\models\DC;
 use common\models\BlogtypeSearch;
 use common\models\BlogSearch;
 
-//$category_list = DC::get_menu_brands();
+//$category_list = DC::get_menu_projects();
 $searchModel = new BlogtypeSearch();
 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 $blog_categories = $dataProvider->getModels();
@@ -14,7 +14,7 @@ $dataProvider_blog = $searchModel_blog->search(Yii::$app->request->queryParams);
 
 $blog_list = $dataProvider_blog->query->where([])->orderBy(['date_published' => SORT_DESC])->all();
 $menu_list = DC::get_menu();
-$brands = DC::get_menu_brands();
+$projects = DC::get_menu_projects();
 echo '</div>';
 
 ?>
@@ -43,14 +43,14 @@ echo '</div>';
     </div>
     <div class="row">
       <div class="col-md-3 smaller-90 my-2">
-        <p class="text-uppercase bigger-120 mb-2"><?php echo Yii::t('common', 'Product'); ?></p>
-          <?php for ($i = 0; $i < count($brands); $i++) {
-          $brand = $brands[$i];
+        <p class="text-uppercase bigger-120 mb-2"><?php echo Yii::t('common', 'Character'); ?></p>
+          <?php for ($i = 0; $i < count($projects); $i++) {
+          $project = $projects[$i];
           // print_r($product_c);
           ?>
        
         <ul class="footer-nav nav flex-column align-items-start">
-          <li class="nav-item"><a href="<?= $brand['link'] ?>" class="nav-link"><?= $brand['text'] ?></a></li>
+          <li class="nav-item"><a href="<?= $project['link'] ?>" class="nav-link"><?= $project['text'] ?></a></li>
         </ul>
           <?php } ?>
       </div>

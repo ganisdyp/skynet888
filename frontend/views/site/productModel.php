@@ -4,40 +4,40 @@
 
 use yii\helpers\Html;
 use frontend\models\DC;
-use common\models\ProductTypeSearch;
-use common\models\ProductSearch;
-define('PAGE_NAME', 'product');
-$this->title = Yii::t('common', 'Product');
+use common\models\CharacterTypeSearch;
+use common\models\CharacterSearch;
+define('PAGE_NAME', 'character');
+$this->title = Yii::t('common', 'Character');
 $this->params['breadcrumbs'][] = $this->title;
 
-$category_list = DC::get_menu_brands();
+$category_list = DC::get_menu_projects();
 
-$searchModel = new ProductTypeSearch();
+$searchModel = new CharacterTypeSearch();
 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-$product_categories = $dataProvider->getModels();
+$character_categories = $dataProvider->getModels();
 
-$searchModel_product = new ProductSearch();
-$dataProvider_product = $searchModel_product->search(Yii::$app->request->queryParams);
+$searchModel_character = new CharacterSearch();
+$dataProvider_character = $searchModel_character->search(Yii::$app->request->queryParams);
 
 $category_id = 0;
-$product_list = [];
+$character_list = [];
 if (isset($_GET['id']) && trim($_GET['id']) != '') {
     $category_id = $_GET['id'];
     $selected_category = $dataProvider->query->where(['id' => $category_id])->one();
-    $product_list = $dataProvider_product->query->where(['product_type_id' => $category_id])->all();
+    $character_list = $dataProvider_character->query->where(['character_type_id' => $category_id])->all();
 } else {
     $selected_category = null;
-    $product_list = $dataProvider_product->query->where([])->all();
+    $character_list = $dataProvider_character->query->where([])->all();
 }
 ?>
-<div id="product-page" class="container">
+<div id="character-page" class="container">
     <?php /*
   <div class="page-header has-right-content fadeIn animated d03s" style="background-image: url(http://smartyschool.stylemixthemes.com/university/wp-content/uploads/2016/09/bg-shop.jpg);">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 col-12 align-self-center">
           <div class="header-content">
-            <p class="title h3 bold text-uppercase">Product</p>
+            <p class="title h3 bold text-uppercase">Character</p>
             <p class="mb-lg-0 mb-2">Lorem ipsum dolor sit amet</p>
           </div>
         </div>
@@ -57,29 +57,29 @@ venenatis et at orci.</p>
         <ol class="breadcrumb smaller-90">
             <?php if ($category_id == 0) { ?>
                 <li class="breadcrumb-item"><a href="<?php echo Yii::$app->request->BaseUrl.'/site/index'; ?>"><?php echo Yii::t('common', 'Home');?></a></li>
-                <li class="breadcrumb-item active"><?php echo Yii::t('common', 'Product'); ?></li>
+                <li class="breadcrumb-item active"><?php echo Yii::t('common', 'Character'); ?></li>
             <?php } else { ?>
                 <li class="breadcrumb-item"><a href="<?php echo Yii::$app->request->BaseUrl.'/site/index'; ?>"><?php echo Yii::t('common', 'Home');?></a></li>
-                <li class="breadcrumb-item bold"><a href="<?php echo Yii::$app->request->BaseUrl.'/site/product-category'; ?>"><?php echo Yii::t('common', 'Product'); ?></a></li>
+                <li class="breadcrumb-item bold"><a href="<?php echo Yii::$app->request->BaseUrl.'/site/character-category'; ?>"><?php echo Yii::t('common', 'Character'); ?></a></li>
                 <li class="breadcrumb-item active"><?php echo $selected_category->name; ?></li>
             <?php } ?>
         </ol>
     </nav>
     <div class="row fadeIn animated d03s mt-3 mb-4">
         <div class="col-lg-3 order-lg-1 order-2">
-            <div class="card product-category">
+            <div class="card character-category">
                 <div class="card-header text-center bold">
-                    Product Categories
+                    Character Categories
                 </div>
                 <div class="card-body">
                     <ul>
                         <li class="<?php echo ($category_id == 0) ? 'active' : ''; ?>">
-                            <a href="<?php echo Yii::$app->request->BaseUrl.'/site/product-category'; ?>">All</a>
+                            <a href="<?php echo Yii::$app->request->BaseUrl.'/site/character-category'; ?>">All</a>
                         </li>
-                        <?php foreach ($product_categories as $cate) {
+                        <?php foreach ($character_categories as $cate) {
                             $selected = ($category_id == $cate->id) ? 'active' : '';
                             echo '<li class="'.$selected.'">
-                  <a href="'.Yii::$app->request->BaseUrl.'/site/product-category?id='.$cate->id.'">'.$cate->name.'</a>
+                  <a href="'.Yii::$app->request->BaseUrl.'/site/character-category?id='.$cate->id.'">'.$cate->name.'</a>
                   </li>';
                         } ?>
                     </ul>
@@ -106,13 +106,13 @@ venenatis et at orci.</p>
             </div>
           </div>
           */ ?>
-                <?php /* foreach ($product_categories as $product_category) { ?>
+                <?php /* foreach ($character_categories as $character_category) { ?>
           <div class="col-lg-4 col-md-6 col-12">
             <div class="card dc-card mb-4 corner-0 z-shadow fadeIn animated d03s">
-              <a href="<?php echo Yii::$app->request->BaseUrl; ?>/site/product-list?id=<?= $product_category->id; ?>" class="hover-box">
+              <a href="<?php echo Yii::$app->request->BaseUrl; ?>/site/character-list?id=<?= $character_category->id; ?>" class="hover-box">
                 <div class="img-1by1 holder">
                   <img class="card-img-top img-responsive corner-0"
-                    src="<?php echo Yii::$app->request->BaseUrl; ?>/backend/uploads/product_type/<?= $product_category->main_photo; ?>">
+                    src="<?php echo Yii::$app->request->BaseUrl; ?>/backend/uploads/character_type/<?= $product_category->main_photo; ?>">
                 </div>
               </a>
               <div class="card-body text-center">

@@ -8,7 +8,7 @@ use fedemotta\datatables\DataTables;
 /* @var $searchModel backend\modules\content\models\BlogSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('backend', 'Blog News');
+$this->title = Yii::t('backend', 'News');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="blog-index">

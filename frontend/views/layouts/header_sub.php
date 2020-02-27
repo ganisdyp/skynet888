@@ -8,7 +8,7 @@ echo '<div class="view-content">';
 ?>
 <nav class="navbar navbar-expand-lg navbar-light navbar-sub fixed-top bg-white shadow">
   <div class="container">
-    <a class="navbar-brand bold" href="<?php echo Yii::$app->request->BaseUrl.'/site/index'; ?>">
+    <a class="navbar-project bold" href="<?php echo Yii::$app->request->BaseUrl.'/site/index'; ?>">
       <img src="../images/logo.png" alt="safebox thailand">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsub" aria-controls="navbarsub" aria-expanded="false" aria-label="Toggle navigation">

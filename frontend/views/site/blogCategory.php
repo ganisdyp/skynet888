@@ -11,7 +11,7 @@ define('PAGE_NAME', 'blog');
 $this->title = Yii::t('common', 'Blog');
 $this->params['breadcrumbs'][] = $this->title;
 
-//$category_list = DC::get_menu_brands();
+//$category_list = DC::get_menu_projects();
 $searchModel = new BlogtypeSearch();
 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 $blog_categories = $dataProvider->getModels();

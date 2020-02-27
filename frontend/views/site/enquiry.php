@@ -7,15 +7,15 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
-use common\models\ProductSearch;
+use common\models\CharacterSearch;
 $this->title = Yii::t('common', 'Contact');
 $this->params['breadcrumbs'][] = $this->title;
 define('PAGE_NAME', 'enquiry');
 
 
-$searchModel = new ProductSearch();
+$searchModel = new CharacterSearch();
 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-$product = $dataProvider->query->where(['id' => $product_id])->one();
+$character = $dataProvider->query->where(['id' => $product_id])->one();
 ?>
 <div id="contact-page" class="container mb-5 pb-4">
   <div class="row">

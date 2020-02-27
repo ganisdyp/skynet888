@@ -10,7 +10,7 @@ echo '<div class="view-content pos-rel">';
 ?>
 <nav class="navbar navbar-expand-lg navbar-light navbar-main" data-toggle="affix">
   <div class="container">
-    <a class="navbar-brand bold" href="<?php echo Yii::$app->request->BaseUrl.'/site/index'; ?>">
+    <a class="navbar-project bold" href="<?php echo Yii::$app->request->BaseUrl.'/site/index'; ?>">
       <img src="../images/logo.png" alt="safebox thailand">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">

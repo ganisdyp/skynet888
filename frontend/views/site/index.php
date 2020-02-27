@@ -2,8 +2,8 @@
 
 use frontend\models\DC;
 use common\models\BlogSearch;
-use common\models\ProductTypeSearch;
-use common\models\BrandSearch;
+use common\models\CharacterTypeSearch;
+use common\models\ProjectSearch;
 /* @var $this yii\web\View */
 /* Yii::$app->db->open();*/
 $this->title = Yii::t('common', 'Home');
@@ -11,11 +11,11 @@ $searchModel = new BlogSearch();
 $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 define('PAGE_NAME', 'index');
 
-$product_category = DC::get_menu_product();
-$brands = DC::get_menu_brands();
+$character_category = DC::get_menu_character();
+$projects = DC::get_menu_projects();
 
 // echo '<pre>';
-// print_r($product_category);
+// print_r($character_category);
 // echo '</pre>';
 ?>
 <div id="index-page">
@@ -65,15 +65,15 @@ $brands = DC::get_menu_brands();
         <img src="../images/about/about.jpg" class="img-fluid" alt="safebox thailand">
       </div>
       <div class="col-lg-8 mt-lg-0 mt-4">
-        <span class="product-tag bg-blue-light viewpoint-animate d03s" data-animation="fadeInDown"><?php echo Yii::t('common', 'tag_highq'); ?></span>
+        <span class="character-tag bg-blue-light viewpoint-animate d03s" data-animation="fadeInDown"><?php echo Yii::t('common', 'tag_highq'); ?></span>
        <!-- <h2 class="page-title my-3 viewpoint-animate d03s" data-animation="fadeInDown"></h2> -->
-        <div class="product-detail mt-4 mb-lg-4 mb-3 viewpoint-animate d03s" data-animation="fadeIn">
+        <div class="character-detail mt-4 mb-lg-4 mb-3 viewpoint-animate d03s" data-animation="fadeIn">
           <?php 
             echo '<p>'.Yii::t('common', 'content_about_1').'</p>';
             echo '<p>'.Yii::t('common', 'content_about_2').'</p>';
           ?>
         </div>
-        <!--<a href="product-detail.php" class="btn btn-primary"></a> -->
+        <!--<a href="character-detail.php" class="btn btn-primary"></a> -->
       </div>
     </div>
   </div>
@@ -83,24 +83,24 @@ $brands = DC::get_menu_brands();
   <div class="row py-5">
     <div class="col-12 mb-3">
       <div class="section-title text-center mt-3 viewpoint-animate d03s" data-animation="fadeIn">
-        <h2 class="letter-spacing-1 font-playfair text-white"><?php echo Yii::t('common', 'our_brand'); ?></h2>
+        <h2 class="letter-spacing-1 font-playfair text-white"><?php echo Yii::t('common', 'our_project'); ?></h2>
         <hr class="mx-auto">
       </div>
     </div>
-    <?php for ($i = 0; $i < count($brands); $i++) {
-      $brand = $brands[$i];
-      // print_r($product_c);
+    <?php for ($i = 0; $i < count($projects); $i++) {
+      $project = $projects[$i];
+      // print_r($character_c);
       ?>
       <div class="col-lg-4 col-md-6 mb-4">
-        <a href="<?php echo $brand['link']; ?>">
+        <a href="<?php echo $project['link']; ?>">
           <div class="card card-event">
             <div class="card-image pos-rel">
               <div class="img-4by3 holder">
-                <img class="card-img-top img-fluid" src="<?= Yii::$app->request->BaseUrl;?>/backend/uploads/brand/<?= $brand['main_photo']; ?>">
+                <img class="card-img-top img-fluid" src="<?= Yii::$app->request->BaseUrl;?>/backend/uploads/project/<?= $project['main_photo']; ?>">
               </div>
             </div>
             <div class="card-body text-center py-0">
-              <div class="card-title bold"><?php echo $brand['text']; ?></div>
+              <div class="card-title bold"><?php echo $project['text']; ?></div>
             </div>
           </div>
         </a>
