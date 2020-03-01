@@ -3,7 +3,9 @@
 use common\models\ProjectSearch;
 use common\models\StorySearch;
 use common\models\CharacterSearch;
-
+use common\models\EnvironmentSearch;
+use common\models\MovieSearch;
+use common\models\ScreenshotSearch;
 define('PAGE_NAME', 'project-detail');
 
 $searchModel_project = new ProjectSearch();
@@ -17,6 +19,18 @@ $story = $dataProvider_story->query->where(['project_id' => $_GET["id"]])->one()
 $searchModel_character = new CharacterSearch();
 $dataProvider_character = $searchModel_character->search(Yii::$app->request->queryParams);
 $characters = $dataProvider_character->query->where(['project_id' => $_GET["id"]])->all();
+/* Get Environment list */
+$searchModel_environment = new EnvironmentSearch();
+$dataProvider_environment = $searchModel_environment->search(Yii::$app->request->queryParams);
+$environments = $dataProvider_environment->query->where(['project_id' => $_GET["id"]])->all();
+/* Get Movie list */
+$searchModel_movie = new MovieSearch();
+$dataProvider_movie = $searchModel_movie->search(Yii::$app->request->queryParams);
+$movies = $dataProvider_movie->query->where(['project_id' => $_GET["id"]])->all();
+/* Get Screenshot list */
+$searchModel_screenshot = new ScreenshotSearch();
+$dataProvider_screenshot = $searchModel_screenshot->search(Yii::$app->request->queryParams);
+$screenshots = $dataProvider_screenshot->query->where(['project_id' => $_GET["id"]])->all();
 ?>
 <div id="page-content">
     <div class="container-fluid">
@@ -83,48 +97,15 @@ $characters = $dataProvider_character->query->where(['project_id' => $_GET["id"]
                     <div class="project-section-head">Environment</div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a class="d-block" data-fancybox="environment" href="images/mockup/screenshot/1.jpg"
-                                   data-caption="Caption #1 environment Set. Facilisis gravida neque convallis a cras. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Sit amet dictum sit amet justo. Morbi non arcu risus quis varius quam quisque id diam. Facilisis gravida neque convallis a cras. Nullam vehicula ipsum a arcu cursus vitae congue mauris.">
-                                    <img class="img-fluid" src="images/mockup/screenshot/1.jpg">
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a class="d-block" data-fancybox="environment" href="images/mockup/screenshot/1.jpg"
-                                   data-caption="Caption #2 environment Set. Facilisis gravida neque convallis a cras. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Sit amet dictum sit amet justo. Morbi non arcu risus quis varius quam quisque id diam. Facilisis gravida neque convallis a cras. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Sit amet dictum sit amet justo. Morbi non arcu risus quis varius quam quisque id diam.">
-                                    <img class="img-fluid" src="images/mockup/screenshot/1.jpg">
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a class="d-block" data-fancybox="environment" href="images/mockup/screenshot/1.jpg"
-                                   data-caption="Caption #3 environment Set. Facilisis gravida neque convallis a cras. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Sit amet dictum sit amet justo. Morbi non arcu risus quis varius quam quisque id diam. Facilisis gravida neque convallis a cras. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Sit amet dictum sit amet justo. Morbi non arcu risus quis varius quam quisque id diam.">
-                                    <img class="img-fluid" src="images/mockup/screenshot/1.jpg">
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a class="d-block" data-fancybox="environment" href="images/mockup/screenshot/1.jpg"
-                                   data-caption="Caption #3 environment Set. Facilisis gravida neque convallis a cras. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Sit amet dictum sit amet justo. Morbi non arcu risus quis varius quam quisque id diam. Facilisis gravida neque convallis a cras. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Sit amet dictum sit amet justo. Morbi non arcu risus quis varius quam quisque id diam.">
-                                    <img class="img-fluid" src="images/mockup/screenshot/1.jpg">
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a class="d-block" data-fancybox="environment" href="images/mockup/screenshot/1.jpg"
-                                   data-caption="Caption #3 environment Set. Facilisis gravida neque convallis a cras. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Sit amet dictum sit amet justo. Morbi non arcu risus quis varius quam quisque id diam. Facilisis gravida neque convallis a cras. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Sit amet dictum sit amet justo. Morbi non arcu risus quis varius quam quisque id diam.">
-                                    <img class="img-fluid" src="images/mockup/screenshot/1.jpg">
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a class="d-block" data-fancybox="environment" href="images/mockup/screenshot/1.jpg"
-                                   data-caption="Caption #3 environment Set. Facilisis gravida neque convallis a cras. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Sit amet dictum sit amet justo. Morbi non arcu risus quis varius quam quisque id diam. Facilisis gravida neque convallis a cras. Nullam vehicula ipsum a arcu cursus vitae congue mauris. Sit amet dictum sit amet justo. Morbi non arcu risus quis varius quam quisque id diam.">
-                                    <img class="img-fluid" src="images/mockup/screenshot/1.jpg">
-                                </a>
-                            </div>
+                            <?php foreach ($environments as $environment) { ?>
+                                <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
+                                     data-animation="fadeIn">
+                                    <a class="d-block" data-fancybox="environment" href="../backend/uploads/environment/<?= $environment->main_photo;?>"
+                                       data-caption="<?= $environment->description;?>">
+                                        <img class="img-fluid" src="../backend/uploads/environment/<?= $environment->main_photo;?>">
+                                    </a>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -132,48 +113,15 @@ $characters = $dataProvider_character->query->where(['project_id' => $_GET["id"]
                     <div class="project-section-head">Moive/Trailer</div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a data-fancybox href="https://www.youtube.com/watch?v=IwbwVpj-Ijc">
-                                    <div class="holder img-16by9"><img class="img-fluid"
-                                                                       src="images/mockup/screenshot/1.jpg"></div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a data-fancybox href="https://www.youtube.com/watch?v=IwbwVpj-Ijc">
-                                    <div class="holder img-16by9"><img class="img-fluid"
-                                                                       src="images/mockup/screenshot/1.jpg"></div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a data-fancybox href="https://www.youtube.com/watch?v=IwbwVpj-Ijc">
-                                    <div class="holder img-16by9"><img class="img-fluid"
-                                                                       src="images/mockup/screenshot/1.jpg"></div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a data-fancybox href="https://www.youtube.com/watch?v=IwbwVpj-Ijc">
-                                    <div class="holder img-16by9"><img class="img-fluid"
-                                                                       src="images/mockup/screenshot/1.jpg"></div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a data-fancybox href="https://www.youtube.com/watch?v=IwbwVpj-Ijc">
-                                    <div class="holder img-16by9"><img class="img-fluid"
-                                                                       src="images/mockup/screenshot/1.jpg"></div>
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a data-fancybox href="https://www.youtube.com/watch?v=IwbwVpj-Ijc">
-                                    <div class="holder img-16by9"><img class="img-fluid"
-                                                                       src="images/mockup/screenshot/1.jpg"></div>
-                                </a>
-                            </div>
+                            <?php foreach ($movies as $movie) { ?>
+                                <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
+                                     data-animation="fadeIn">
+                                    <a class="d-block" data-fancybox="movie" href="<?= $movie->main_photo;?>"
+                                       data-caption="<?= $movie->description;?>">
+                                        <iframe class="img-fluid" width="560" height="315" src="<?= $movie->main_photo;?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </a>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
@@ -181,42 +129,15 @@ $characters = $dataProvider_character->query->where(['project_id' => $_GET["id"]
                     <div class="project-section-head">Screenshot</div>
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a class="d-block" data-fancybox="screenshot" href="images/mockup/screenshot/1.jpg">
-                                    <img class="img-fluid" src="images/mockup/screenshot/1.jpg">
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a class="d-block" data-fancybox="screenshot" href="images/mockup/screenshot/1.jpg">
-                                    <img class="img-fluid" src="images/mockup/screenshot/1.jpg">
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a class="d-block" data-fancybox="screenshot" href="images/mockup/screenshot/1.jpg">
-                                    <img class="img-fluid" src="images/mockup/screenshot/1.jpg">
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a class="d-block" data-fancybox="screenshot" href="images/mockup/screenshot/1.jpg">
-                                    <img class="img-fluid" src="images/mockup/screenshot/1.jpg">
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a class="d-block" data-fancybox="screenshot" href="images/mockup/screenshot/1.jpg">
-                                    <img class="img-fluid" src="images/mockup/screenshot/1.jpg">
-                                </a>
-                            </div>
-                            <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
-                                 data-animation="fadeIn">
-                                <a class="d-block" data-fancybox="screenshot" href="images/mockup/screenshot/1.jpg">
-                                    <img class="img-fluid" src="images/mockup/screenshot/1.jpg">
-                                </a>
-                            </div>
+                            <?php foreach ($screenshots as $screenshot) { ?>
+                                <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
+                                     data-animation="fadeIn">
+                                    <a class="d-block" data-fancybox="screentshot" href="../backend/uploads/screenshot/<?= $screenshot->main_photo;?>"
+                                       data-caption="">
+                                        <img class="img-fluid" src="../backend/uploads/screenshot/<?= $screenshot->main_photo;?>">
+                                    </a>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
