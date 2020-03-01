@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Story */
+/* @var $model common\models\Screenshot */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Stories'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('backend', 'Screenshots'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="story-view">
+<div class="screenshot-view">
 
     <p>
         <?= Html::a(Yii::t('backend', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -29,14 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
         //echo $extension;
         $media_type = $model->media_type;
         if ($media_type == 1) {  /* echo "<video id='current_media' width='480' controls controlsList=\"nodownload\">";
-            echo "<source src='" . Yii::$app->getHomeUrl() . 'uploads/story/' . $model->main_photo . "'  type='video/mp4'>";
+            echo "<source src='" . Yii::$app->getHomeUrl() . 'uploads/screenshot/' . $model->main_photo . "'  type='video/mp4'>";
             echo "</video>";*/
             ?>
 
             <iframe width="480" height="320" src="<?= $model->main_photo; ?>"
                     allowfullscreen></iframe>
         <?php } else {
-            echo Html::img(Yii::$app->getHomeUrl() . 'uploads/story/' . $model->main_photo,
+            echo Html::img(Yii::$app->getHomeUrl() . 'uploads/screenshot/' . $model->main_photo,
                 ['class' => 'thumbnail', 'width' => '250']);
         }
 
@@ -46,9 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
 
-            //  'id',
-
-            //'project.name',
+                'id',
             [
                 'attribute' => 'project.name',
                 'value' => function ($model) {
@@ -58,23 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 },
                 'label' => 'Project',
-            ],
-            'name',
-            [
-                'attribute' => 'description',
-                'value' => function ($model) {
-                    return $model->description;
-                },
-                'label' => 'Description (EN)',
-                'format' => 'html'
-            ],
-            [
-                'attribute' => 'description_th',
-                'value' => function ($model) {
-                    return $model->description_th;
-                },
-                'label' => 'Description (TH)',
-                'format' => 'html'
             ],
             'date_published',
 

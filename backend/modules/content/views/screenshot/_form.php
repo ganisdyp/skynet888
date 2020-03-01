@@ -3,85 +3,29 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\ProjectLang;
-use common\models\StoryPhoto;
 use yii\helpers\ArrayHelper;
 use kartik\date\DatePicker;
 use kartik\file\FileInput;
 use dosamigos\tinymce\TinyMce;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Story */
+/* @var $model common\models\Screenshot */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
 
-<div class="story-form">
+<div class="screenshot-form">
     <?php $form = ActiveForm::begin(['enableClientValidation' => false]); ?>
     <div class="row">
         <div class="col-md-12">
             <?= $form->errorSummary($model); ?>
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#english">English</a></li>
-                <li><a data-toggle="tab" href="#thai">Thai</a></li>
-            </ul>
-        </div>
-        <!-- Tab content -->
-        <div class="tab-content col-md-8">
-            <div id="english" class="tab-pane fade in active">
-                <br>
-                <div class="col-md-12">
-                    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-                </div>
-                <div class="col-md-12">
-                    <?= $form->field($model, 'description')->widget(TinyMce::className(), [
-                        'options' => ['rows' => 10],
-                        'language' => 'en',
-                        'clientOptions' => [
-                            'plugins' => [
-                                "advlist autolink lists link charmap print preview anchor",
-                                "searchreplace visualblocks code fullscreen textcolor",
-                                "insertdatetime media table contextmenu paste"
-                            ],
-                            'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor",
-                            'textcolor_map' => [
-                                "000000", "Black",
-                                "5734ba", "DC purple",
-                            ]
-                        ]
-                    ]); ?>
-                </div>
-            </div>
-            <div id="thai" class="tab-pane fade">
-                <br>
-                <div class="col-md-12">
-                    <?= $form->field($model, 'name_th')->textInput(['maxlength' => true]) ?>
-                </div>
-                <div class="col-md-12">
-                    <?= $form->field($model, 'description_th')->widget(TinyMce::className(), [
-                        'options' => ['rows' => 10],
-                        'language' => 'en',
-                        'clientOptions' => [
-                            'plugins' => [
-                                "advlist autolink lists link charmap print preview anchor",
-                                "searchreplace visualblocks code fullscreen textcolor",
-                                "insertdatetime media table contextmenu paste"
-                            ],
-                            'toolbar' => "undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | forecolor backcolor",
-                            'textcolor_map' => [
-                                "000000", "Black",
-                                "5734ba", "DC purple",
-                            ]
-                        ]
-                    ]); ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
             <div class="col-md-12">
                 <br>
                 <?= $form->field($model, 'project_id')->dropDownList(ArrayHelper::map(ProjectLang::find()->all(), 'project_id', 'name'), ['prompt' => '- Select -'])->label('Related Project') ?>
             </div>
         </div>
+        <!-- Tab content -->
+
     </div>
     <div class="row">
         <div class="col-md-12">
@@ -108,7 +52,7 @@ use dosamigos\tinymce\TinyMce;
                     <div id="image-box" class="col-md-12">
                         <br>
                         <?php
-                        /* echo Html::img(Yii::$app->getHomeUrl() . 'uploads/story/' . $model->main_photo,
+                        /* echo Html::img(Yii::$app->getHomeUrl() . 'uploads/screenshot/' . $model->main_photo,
                              ['id' => 'current_img', 'class' => 'thumbnail', 'width' => '150']);*/
                         //    echo $form->field($model, 'main_photo_file')->fileInput();
                         echo $form->field($model, 'main_photo_file')->widget(FileInput::classname(), [
@@ -146,14 +90,14 @@ use dosamigos\tinymce\TinyMce;
                     <div id="image-box" class="col-md-12">
                         <br>
                         <?php
-                        /* echo Html::img(Yii::$app->getHomeUrl() . 'uploads/story/' . $model->main_photo,
+                        /* echo Html::img(Yii::$app->getHomeUrl() . 'uploads/screenshot/' . $model->main_photo,
                              ['id' => 'current_img', 'class' => 'thumbnail', 'width' => '150']);*/
                         // echo $form->field($model, 'main_photo_file')->fileInput();
                         echo $form->field($model, 'main_photo_file')->widget(FileInput::classname(), [
                             'options' => ['accept' => 'image/*'], 'pluginOptions' => [
                                 'showUpload' => false,
                                 'initialPreview' => [
-                                    [Yii::$app->request->BaseUrl."/uploads/story/$model->main_photo"]
+                                    [Yii::$app->request->BaseUrl."/uploads/screenshot/$model->main_photo"]
                                 ],
                                 'initialPreviewAsData' => true,
                                 'initialCaption' => "$model->main_photo",
@@ -189,12 +133,12 @@ use dosamigos\tinymce\TinyMce;
     if(isImage){
      $(\'#video-box\').hide();
    $(\'#image-box\').show();
-    $(\'#story-media_type\').val(2);
+    $(\'#screenshot-media_type\').val(2);
   
     }else{
      $(\'#image-box\').hide();
    $(\'#video-box\').show();
-     $(\'#story-media_type\').val(1);
+     $(\'#screenshot-media_type\').val(1);
   
     }
     });
@@ -204,11 +148,11 @@ use dosamigos\tinymce\TinyMce;
         if(isImage){
           $(\'#video-box\').hide();
    $(\'#image-box\').show();
-    $(\'#story-media_type\').val(2);
+    $(\'#screenshot-media_type\').val(2);
         }else{
          $(\'#image-box\').hide();
    $(\'#video-box\').show();
-     $(\'#story-media_type\').val(1);
+     $(\'#screenshot-media_type\').val(1);
           
         }
        
@@ -219,7 +163,7 @@ var ValidTypes = ["image/gif", "image/jpeg", "image/png"];
 if ($.inArray(fileType, ValidTypes) < 0) {
     alert("INVALID FILE TYPE!");
    $(\'#current_img\').show();
-   $(\'#story-main_photo\').val(\'\');
+   $(\'#screenshot-main_photo\').val(\'\');
 }else{
 $(\'#current_img\').hide();
 }

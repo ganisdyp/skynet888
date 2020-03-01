@@ -242,7 +242,7 @@ use dosamigos\tinymce\TinyMce;
                             'options' => ['accept' => 'image/*'], 'pluginOptions' => [
                                 'showUpload' => false,
                                 'initialPreview' => [
-                                    ["www.safeboxasia.com/backend/uploads/blog/$model->main_photo"]
+                                    [Yii::$app->request->BaseUrl."/uploads/blog/$model->main_photo"]
                                 ],
                                 'initialPreviewAsData' => true,
                                 'initialCaption' => "$model->main_photo",

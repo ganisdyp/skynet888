@@ -182,7 +182,7 @@ use kartik\file\FileInput;
                                 'options' => ['accept' => 'image/*'], 'pluginOptions' => [
                                     'showUpload' => false,
                                     'initialPreview' => [
-                                        ["http://www.safeboxasia.com/backend/uploads/career/related_photo/$modelDetail->photo_url"]
+                                        [Yii::$app->request->BaseUrl."/uploads/career/related_photo/$modelDetail->photo_url"]
                                     ],
                                     'initialPreviewAsData' => true,
                                     'initialCaption' => "$modelDetail->photo_url",

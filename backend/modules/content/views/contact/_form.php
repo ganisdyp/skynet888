@@ -1,23 +1,23 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-use common\models\AboutPhoto;
+use common\models\ContactPhoto;
 use dosamigos\tinymce\TinyMce;
 use kartik\file\FileInput;
-use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\About */
+/* @var $model common\models\Contact */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 <?php $this->registerJs("
     $('.delete-button-photo').click(function() {
-        var detail = $(this).closest('.about-profile');
+        var detail = $(this).closest('.contact-profile');
         var updateType = detail.find('.update-type');
-        if (updateType.val() === " . json_encode(AboutPhoto::UPDATE_TYPE_UPDATE) . ") {
+        if (updateType.val() === " . json_encode(ContactPhoto::UPDATE_TYPE_UPDATE) . ") {
             //marking the row for deletion
-            updateType.val(" . json_encode(AboutPhoto::UPDATE_TYPE_DELETE) . ");
+            updateType.val(" . json_encode(ContactPhoto::UPDATE_TYPE_DELETE) . ");
             detail.hide();
         } else {
             //if the row is a new row, delete the row
@@ -30,7 +30,7 @@ use yii\helpers\ArrayHelper;
 ?>
 <style>
 </style>
-<div class="about-form">
+<div class="contact-form">
 
 
     <ul class="nav nav-tabs">
@@ -161,6 +161,7 @@ use yii\helpers\ArrayHelper;
             ]); ?>
         </div>
     </div>
+
     <?= "<h4>Addition Details</h4>" ?>
     <div class="col-md-12">
         <?= $form->errorSummary($modelDetails); ?>
@@ -171,18 +172,19 @@ use yii\helpers\ArrayHelper;
     <div class="tab-content col-md-12">
         <div id="photo" class="tab-pane fade in active">
             <div class="row">
-                <?php foreach ($modelDetails as $i => $modelDetail) : ?>
-                    <div class="about-profile about-profile-<?= $i ?>" style="margin-top: .75rem;">
+                <?php
+                foreach ($modelDetails as $i => $modelDetail) : ?>
+                    <div class="contact-profile contact-profile-<?= $i ?>" style="margin-top: .75rem;">
                         <div class="col-md-5 col-xs-10">
                             <?= Html::activeHiddenInput($modelDetail, "[$i]id") ?>
                             <?= Html::activeHiddenInput($modelDetail, "[$i]updateType", ['class' => 'update-type']) ?>
-                            <?php //echo $form->field($modelDetail, "[$i]about_photo")->fileInput()
+                            <?php //echo $form->field($modelDetail, "[$i]contact_photo")->fileInput()
                             //
-                            echo $form->field($modelDetail, "[$i]about_photo")->widget(FileInput::classname(), [
+                            echo $form->field($modelDetail, "[$i]contact_photo")->widget(FileInput::classname(), [
                                 'options' => ['accept' => 'image/*'], 'pluginOptions' => [
                                     'showUpload' => false,
                                     'initialPreview' => [
-                                        [Yii::$app->request->BaseUrl."/uploads/about/related_photo/$modelDetail->photo_url"]
+                                        [Yii::$app->request->BaseUrl."/uploads/contact/related_photo/$modelDetail->photo_url"]
                                     ],
                                     'initialPreviewAsData' => true,
                                     'initialCaption' => "$modelDetail->photo_url",
@@ -197,7 +199,7 @@ use yii\helpers\ArrayHelper;
                         </div>
                         <div class="col-md-1 col-xs-2">
                             <div style="margin-top: 2rem;">
-                                <?= Html::button('x', ['class' => 'delete-button-photo btn btn-danger', 'data-target' => "about-profile-$i"]) ?>
+                                <?= Html::button('x', ['class' => 'delete-button-photo btn btn-danger', 'data-target' => "contact-profile-$i"]) ?>
                             </div>
                         </div>
                     </div>

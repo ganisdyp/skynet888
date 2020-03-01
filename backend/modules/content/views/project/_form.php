@@ -199,7 +199,7 @@ use common\models\ProjectPhoto;
                                 'options' => ['accept' => 'image/*'], 'pluginOptions' => [
                                     'showUpload' => false,
                                     'initialPreview' => [
-                                        [Yii::$app->request->BaseUrl."/backend/uploads/project/$model->main_photo"]
+                                        [Yii::$app->request->BaseUrl."/uploads/project/$model->main_photo"]
                                     ],
                                     'initialPreviewAsData' => true,
                                     'initialCaption' => "$model->main_photo",
@@ -217,44 +217,7 @@ use common\models\ProjectPhoto;
                         ?>
                     </div>
                     <div class="col-md-6">
-                        <div id="photo" class="tab-pane fade in active">
-                            
-                                <br>
-                                <?php foreach ($modelDetails as $i => $modelDetail) : ?>
-                                    <div class="row project-photo project-photo-<?= $i ?>">
-                                        <div class="col-md-10">
-                                            <?= Html::activeHiddenInput($modelDetail, "[$i]id") ?>
-                                            <?= Html::activeHiddenInput($modelDetail, "[$i]updateType", ['class' => 'update-type']) ?>
 
-                                            <?php
-                                            echo $form->field($modelDetail, "[$i]project_photo")->widget(FileInput::classname(), [
-                                                'options' => ['accept' => 'image/*'], 'pluginOptions' => [
-                                                    'showUpload' => false,
-                                                    'initialPreview' => [
-                                                        [Yii::$app->request->BaseUrl."/backend/uploads/project/related_photo/$modelDetail->photo_url"]
-                                                    ],
-                                                    'initialPreviewAsData' => true,
-                                                    'initialCaption' => "$modelDetail->photo_url",
-                                                    'initialPreviewConfig' => [
-                                                        ['caption' => $modelDetail->photo_url]
-                                                    ],
-                                                    'overwriteInitial' => false,
-                                                    'maxFileSize' => 100000
-                                                ],
-                                            ]);
-                                            //echo $form->field($modelDetail, "[$i]blog_photo")->fileInput() ?>
-
-
-                                        </div>
-                                        <div class="col-md-2">
-                                            <?= Html::button('x', ['class' => 'delete-button-photo btn btn-danger', 'data-target' => "project-photo-$i"]) ?>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                                <?= Html::submitButton('<i class="fa fa-plus"></i> photo', ['name' => 'addRowPhoto', 'value' => 'true', 'class' => 'btn btn-info']) ?>
-
-                            <div class="col-md-6"></div>
-                        </div>
                     </div>
                 </div>
 

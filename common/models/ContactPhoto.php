@@ -5,15 +5,15 @@ namespace common\models;
 use Yii;
 
 /**
- * This is the model class for table "story_photo".
+ * This is the model class for table "contact_photo".
  *
  * @property int $id
  * @property string $photo_url
- * @property int $story_id
+ * @property int $contact_id
  *
- * @property Story $story
+ * @property Contact $contact
  */
-class StoryPhoto extends \yii\db\ActiveRecord
+class ContactPhoto extends \yii\db\ActiveRecord
 {
 
     const UPDATE_TYPE_CREATE = 'create';
@@ -21,7 +21,7 @@ class StoryPhoto extends \yii\db\ActiveRecord
     const UPDATE_TYPE_DELETE = 'delete';
     const SCENARIO_BATCH_UPDATE = 'batchUpdate';
     private $_updateType;
-    public $story_photo;
+    public $contact_photo;
     public function getUpdateType()
     {
         if (empty($this->_updateType)) {
@@ -42,7 +42,7 @@ class StoryPhoto extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'story_photo';
+        return 'contact_photo';
     }
 
     /**
@@ -57,11 +57,11 @@ class StoryPhoto extends \yii\db\ActiveRecord
                 'range' => [self::UPDATE_TYPE_CREATE, self::UPDATE_TYPE_UPDATE, self::UPDATE_TYPE_DELETE],
                 'on' => self::SCENARIO_BATCH_UPDATE
             ],
-            [['story_id'], 'required','except' => self::SCENARIO_BATCH_UPDATE],
-            [['story_id'], 'integer'],
-            [['story_photo'],'file','skipOnEmpty' => true, 'on' => 'update', 'extensions' => 'jpg,png,gif'],
+            [['contact_id'], 'required','except' => self::SCENARIO_BATCH_UPDATE],
+            [['contact_id'], 'integer'],
+            [['contact_photo'],'file','skipOnEmpty' => true, 'on' => 'update', 'extensions' => 'jpg,png,gif'],
             [['photo_url'], 'string', 'max' => 100],
-            [['story_id'], 'exist', 'skipOnError' => true, 'targetClass' => Story::className(), 'targetAttribute' => ['story_id' => 'id']],
+            [['contact_id'], 'exist', 'skipOnError' => true, 'targetClass' => Contact::className(), 'targetAttribute' => ['contact_id' => 'id']],
         ];
     }
 
@@ -72,16 +72,16 @@ class StoryPhoto extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('common', 'ID'),
-            'photo_url' => Yii::t('common', 'Story Url'),
-            'story_id' => Yii::t('common', 'Story ID'),
+            'photo_url' => Yii::t('common', 'Contact Url'),
+            'contact_id' => Yii::t('common', 'Contact ID'),
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getStory()
+    public function getContact()
     {
-        return $this->hasOne(Story::className(), ['id' => 'story_id']);
+        return $this->hasOne(Contact::className(), ['id' => 'contact_id']);
     }
 }

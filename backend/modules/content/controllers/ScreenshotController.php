@@ -4,18 +4,18 @@ namespace backend\modules\content\controllers;
 
 use Yii;
 use yii\base\Model;
-use common\models\Project;
-use common\models\ProjectPhoto;
-use backend\modules\content\models\ProjectSearch;
+use common\models\Screenshot;
+use backend\modules\content\models\ScreenshotSearch;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**
- * ProjectController implements the CRUD actions for Project model.
+ * ScreenshotController implements the CRUD actions for Screenshot model.
  */
-class ProjectController extends Controller
+class ScreenshotController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,12 +33,12 @@ class ProjectController extends Controller
     }
 
     /**
-     * Lists all Project models.
+     * Lists all Screenshot models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ProjectSearch();
+        $searchModel = new ScreenshotSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Displays a single Project model.
+     * Displays a single Screenshot model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,26 +61,32 @@ class ProjectController extends Controller
     }
 
     /**
-     * Creates a new Project model.
+     * Creates a new Screenshot model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Project();
+        $model = new Screenshot();
+
 
         if ($model->load(Yii::$app->request->post())) {
+
+
             if ($model->validate()) {
+
+                //print_r($model);
                 $file = UploadedFile::getInstance($model, 'main_photo_file');
-                if (isset($file->size) && $file->size !== 0) {
-                    $unique_name = "project_" . date("Y-m-d_H-i-s") . "_" . uniqid();
+                if (isset($file->size) && $file->size != 0) {
+
+                    $unique_name = "screenshot_" . date("Y-m-d_H-i-s") . "_" . uniqid();
                     $path = $unique_name . ".{$file->extension}";
                     $model->main_photo = $path;
-                    // $model->main_photo = $file->baseName . '.' . $file->extension;
-                    $file->saveAs('uploads/project/' . $path);
+                    $file->saveAs('uploads/screenshot/' . $path);
                 }
                 $model->save();
-                return $this->redirect(['view', 'id' => $model->id]);
+
+                    return $this->redirect(['view', 'id' => $model->id]);
 
             }
         }
@@ -91,7 +97,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * Updates an existing Project model.
+     * Updates an existing Screenshot model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -103,22 +109,24 @@ class ProjectController extends Controller
 
 
         if ($model->load(Yii::$app->request->post())) {
+
+
             if ($model->validate()) {
                 $file = UploadedFile::getInstance($model, 'main_photo_file');
                 //print_r($file);
                 if (isset($file->size) && $file->size !== 0) {
+                    //   $model->main_photo = $file->baseName . '.' . $file->extension;
+                    //   $file->saveAs('uploads/screenshot/' . $file->baseName . '.' . $file->extension);
                     $old_name = $model->main_photo;
-                    $unique_name = "project_" . date("Y-m-d_H-i-s") . "_". uniqid();
+                    $unique_name = "screenshot_" . date("Y-m-d_H-i-s") . "_" . uniqid();
                     $path = $unique_name . ".{$file->extension}";
                     $model->main_photo = $path;
-                    $file->saveAs('uploads/project/' . $path);
+                    $file->saveAs('uploads/screenshot/' . $path);
                     if (isset($old_name)) {
-                        unlink('uploads/project/' . $old_name);
+                        unlink('uploads/screenshot/' . $old_name);
                     } else {
                         // Do nothing
                     }
-                    //  $model->main_photo = $file->baseName . '.' . $file->extension;
-                    //  $file->saveAs('uploads/project/' . $file->baseName . '.' . $file->extension);
                 }
                 $model->save();
 
@@ -126,35 +134,25 @@ class ProjectController extends Controller
             }
         }
 
+
         return $this->render('update', [
             'model' => $model,
-            ]);
+        ]);
+
     }
 
     /**
-     * Deletes an existing Project model.
+     * Deletes an existing Screenshot model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public
-    function actionDelete($id)
+    public function actionDelete($id)
     {
 
-
-        $project_langs = $this->findModel($id)->getProjectLangs()->where(['project_id' => $id])->all();
-        foreach ($project_langs as $project_lang) {
-            $project_lang->delete();
-        }
-
-        $project_photos = $this->findModel($id)->getProjectPhotos()->where(['project_id' => $id])->all();
-        foreach ($project_photos as $project_photo) {
-            unlink('uploads/project/related_photo/' . $project_photo->photo_url);
-            $project_photo->delete();
-        }
         if (isset($this->findModel($id)->main_photo)) {
-            unlink('uploads/project/' . $this->findModel($id)->main_photo);
+            unlink('uploads/screenshot/' . $this->findModel($id)->main_photo);
         } else {
 
         }
@@ -164,19 +162,20 @@ class ProjectController extends Controller
     }
 
     /**
-     * Finds the Project model based on its primary key value.
+     * Finds the Screenshot model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Project the loaded model
+     * @return Screenshot the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected
-    function findModel($id)
+    protected function findModel($id)
     {
-        if (($model = Project::find()->multilingual()->where(['project.id' => $id])->one()) !== null) {
+        if (($model = Screenshot::findOne($id)) !== null) {
             return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
-
-        throw new NotFoundHttpException(Yii::t('backend', 'The requested page does not exist.'));
     }
+
+
 }

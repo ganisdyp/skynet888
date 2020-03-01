@@ -105,12 +105,4 @@ class Story extends \yii\db\ActiveRecord
         return $this->hasMany(StoryLang::className(), ['story_id' => 'id']);
     }
 
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getStoryPhotos()
-    {
-        return $this->hasMany(StoryPhoto::className(), ['story_id' => 'id']);
-    }
 }
