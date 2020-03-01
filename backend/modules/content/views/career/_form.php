@@ -2,11 +2,30 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\models\CareerPhoto;
 use dosamigos\tinymce\TinyMce;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\About */
+/* @var $model common\models\Career */
 /* @var $form yii\widgets\ActiveForm */
+?>
+<?php $this->registerJs("
+    $('.delete-button-photo').click(function() {
+        var detail = $(this).closest('.career-profile');
+        var updateType = detail.find('.update-type');
+        if (updateType.val() === " . json_encode(CareerPhoto::UPDATE_TYPE_UPDATE) . ") {
+            //marking the row for deletion
+            updateType.val(" . json_encode(CareerPhoto::UPDATE_TYPE_DELETE) . ");
+            detail.hide();
+        } else {
+            //if the row is a new row, delete the row
+            detail.remove();
+        }
+
+    });
+       
+");
 ?>
 <style>
 </style>
@@ -139,6 +158,54 @@ use dosamigos\tinymce\TinyMce;
                     ]
                 ]
             ]); ?>
+        </div>
+    </div>
+
+    <?= "<h4>Addition Details</h4>" ?>
+    <div class="col-md-12">
+        <?= $form->errorSummary($modelDetails); ?>
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#photo">Related photos</a></li>
+        </ul>
+    </div>
+    <div class="tab-content col-md-12">
+        <div id="photo" class="tab-pane fade in active">
+            <div class="row">
+                <?php foreach ($modelDetails as $i => $modelDetail) : ?>
+                    <div class="career-profile career-profile-<?= $i ?>" style="margin-top: .75rem;">
+                        <div class="col-md-5 col-xs-10">
+                            <?= Html::activeHiddenInput($modelDetail, "[$i]id") ?>
+                            <?= Html::activeHiddenInput($modelDetail, "[$i]updateType", ['class' => 'update-type']) ?>
+                            <?php //echo $form->field($modelDetail, "[$i]career_photo")->fileInput()
+                            //
+                            echo $form->field($modelDetail, "[$i]career_photo")->widget(FileInput::classname(), [
+                                'options' => ['accept' => 'image/*'], 'pluginOptions' => [
+                                    'showUpload' => false,
+                                    'initialPreview' => [
+                                        ["http://www.safeboxasia.com/backend/uploads/career/related_photo/$modelDetail->photo_url"]
+                                    ],
+                                    'initialPreviewAsData' => true,
+                                    'initialCaption' => "$modelDetail->photo_url",
+                                    'initialPreviewConfig' => [
+                                        ['caption' => $modelDetail->photo_url]
+                                    ],
+                                    'overwriteInitial' => false,
+                                    'maxFileSize' => 100000
+                                ],
+                            ]);
+                            ?>
+                        </div>
+                        <div class="col-md-1 col-xs-2">
+                            <div style="margin-top: 2rem;">
+                                <?= Html::button('x', ['class' => 'delete-button-photo btn btn-danger', 'data-target' => "career-profile-$i"]) ?>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <div class="col-md-12 text-center">
+                <?= Html::submitButton('<i class="fa fa-plus"></i> photo', ['name' => 'addRowPhoto', 'value' => 'true', 'class' => 'btn btn-info']) ?>
+            </div>
         </div>
     </div>
     <div class="form-group">

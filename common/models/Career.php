@@ -13,6 +13,7 @@ use omgdef\multilingual\MultilingualQuery;
  * @property string $date_published
  *
  * @property CareerLang[] $careerLangs
+ * @property AboutPhoto[] $careerPhotos
  */
 class Career extends \yii\db\ActiveRecord
 {
@@ -80,5 +81,13 @@ class Career extends \yii\db\ActiveRecord
     public function getCareerLangs()
     {
         return $this->hasMany(CareerLang::className(), ['career_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCareerPhotos()
+    {
+        return $this->hasMany(CareerPhoto::className(), ['career_id' => 'id']);
     }
 }

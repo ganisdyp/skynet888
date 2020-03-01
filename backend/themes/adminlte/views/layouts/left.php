@@ -41,7 +41,7 @@
                             [
                                 'label' => 'About Us',
                                 'icon' => 'commenting',
-                                'url' => ['/content/about/index'],
+                                'url' => ['/content/about/update?id=1'],
 
                             ],
                             [
@@ -67,13 +67,13 @@
                             [
                                 'label' => 'Career',
                                 'icon' => 'pencil-square-o',
-                                'url' => ['/content/career/index'],
+                                'url' => ['/content/career/update?id=1'],
 
                             ],
                             [
                                 'label' => 'Contact',
                                 'icon' => 'phone-square',
-                                'url' => ['/content/about/index'],
+                                'url' => ['/content/contact/update?id=1'],
 
                             ],
                         ],
