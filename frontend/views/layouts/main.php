@@ -40,7 +40,7 @@ AppAsset::register($this);
   // if ($this->title == 'Home' || $this->title == 'หน้าหลัก') {
     // echo $this->render('header.php');
   // } else {
-    echo $this->render('header_sub.php');
+    echo $this->render('header.php');
   // }
 ?>
 <?= Alert::widget() ?>

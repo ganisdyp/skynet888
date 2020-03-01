@@ -1,48 +1,68 @@
 <?php
-use frontend\models\DC;
-use frontend\models\System;
-//use common\components\LanguageDropdown;
-use yii\helpers\Url;
-use yii\helpers\Html;
-$menu_list = DC::get_menu();
 
-echo '<div class="view-content pos-rel">';
 ?>
-<nav class="navbar navbar-expand-lg navbar-light navbar-main" data-toggle="affix">
-  <div class="container">
-    <a class="navbar-project bold" href="<?php echo Yii::$app->request->BaseUrl.'/site/index'; ?>">
-      <img src="../images/logo.png" alt="safebox thailand">
-    </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarmain">
-      <ul class="navbar-nav ml-auto">
-      <?php
-        foreach ($menu_list as $menu) {
-          $active = (PAGE_NAME == $menu['pagename']) ? 'active' : '';
-          $is_subpage = (isset($menu['subpage'])) ? 'dropdown' : '';
-          $menu_html = '<li class="nav-item '.$active.' '.$is_subpage.'">';
-
-          if(isset($menu['subpage'])) {
-              $subpage_list = $menu['subpage'];
-              $menu_html .= '<a class="nav-link dropdown-toggle" href="'.$menu['link'].'" id="'.$menu['text'].'" role="button" aria-haspopup="true" aria-expanded="false">'.$menu['text'].'</a>';
-
-              $menu_html .= '<div class="dropdown-menu" aria-labelledby="'.$menu['text'].'">';
-              foreach ($subpage_list as $subpage) {
-                  $menu_html .= '<a class="dropdown-item" href="'.$subpage['link'].'">'.$subpage['text'].'</a>';
-              }
-              $menu_html .= '</div>';
-          } else {
-              $menu_html .= '<a class="nav-link" href="'.$menu['link'].'">'.$menu['text'].'</a></li>';
-          }
-          echo $menu_html;
-        }
-
-        echo '<li class="nav-item">'.Html::a('TH', Url::current(['language' => 'th-TH']), ['class' => 'nav-link '.(Yii::$app->request->cookies['language']=='th-TH' ? 'active' : '')]);
-        echo '<li class="nav-item">'.Html::a('EN', Url::current(['language' => 'en-UK']), ['class' => 'nav-link '.(Yii::$app->request->cookies['language']=='en-UK' ? 'active' : '')]);
-        ?>
-      </ul>
+<div id="sidebar-nav-wrapper">
+    <ul class="sidebar-nav">
+        <i class="fa fa-times toggle-btn" id="close-btn" aria-hidden="true"></i>
+        <ul id="menu-mobile" class="sidebar-nav">
+            <li class="nav-item <?php echo (PAGE_NAME == 'index') ? 'active' : ''; ?>"><a class="nav-link" href="index">About Us</a></li>
+            <li class="nav-item <?php echo (PAGE_NAME == 'projects') ? 'active' : ''; ?>"><a class="nav-link" href="projects">Projects</a></li>
+            <li class="nav-item <?php echo (PAGE_NAME == 'news') ? 'active' : ''; ?>"><a class="nav-link" href="news">News</a></li>
+            <li class="nav-item  <?php echo (PAGE_NAME == 'careers') ? 'active' : ''; ?>"><a class="nav-link" href="careers">Careers</a></li>
+            <li class="nav-item  <?php echo (PAGE_NAME == 'contact-us') ? 'active' : ''; ?>"><a class="nav-link" href="contact-us">Contact</a></li>
+            <ul id="social-mobile" class="navbar-nav flex-row justify-content-center">
+                <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
+                <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a></li>
+            </ul>
+        </ul>
+    </ul>
+    <div class="clearfix"></div>
+</div>
+<?php
+echo '<div class="view-content">';
+?>
+<div id="navbar-menu-wrapper">
+    <div id="upper-menu">
+        <ul id="nav-social">
+            <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
+            <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a></li>
+        </ul>
     </div>
-  </div>
-</nav>
+    <div id="top-menu-wrapper" class="justify-content-between">
+        <i class="fa fa-bars toggle-btn" id="toggle-btn" aria-hidden="true"></i>
+        <div class="top-menu-left d-flex">
+            <a class="navbar-brand" href="index.php">
+                <img id="nav-logo" src="../frontend/web/images/logo-skynet888.png" alt="Skynet888 logo">
+            </a>
+            <div class="nav-box-title my-auto">
+                <a href="index.php" id="site-title">SKYNET888</a>
+                <p id="site-desc" class="mb-0">Skynet888 website for all gamers</p>
+            </div>
+        </div>
+        <div class="top-menu-right align-self-center">
+            <nav id="navbar-lg" class="navbar navbar-sub px-0">
+                <div id="navbarsub">
+                    <ul class="navbar-nav flex-row">
+                        <li class="nav-item <?php echo (PAGE_NAME == 'index') ? 'active' : ''; ?>">
+                            <a class="nav-link" href="index">About Us</a>
+                        </li>
+                        <li class="nav-item <?php echo (PAGE_NAME == 'projects') ? 'active' : ''; ?>">
+                            <a class="nav-link" href="projects">Projects</a>
+                        </li>
+                        <li class="nav-item <?php echo (PAGE_NAME == 'news') ? 'active' : ''; ?>">
+                            <a class="nav-link" href="news">News</a>
+                        </li>
+                        <li class="nav-item <?php echo (PAGE_NAME == 'careers') ? 'active' : ''; ?>">
+                            <a class="nav-link" href="careers">Careers</a>
+                        </li>
+                        <li class="nav-item mr-2 <?php echo (PAGE_NAME == 'contact-us') ? 'active' : ''; ?>">
+                            <a class="nav-link" href="contact-us">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

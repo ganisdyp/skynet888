@@ -139,25 +139,16 @@ class SiteController extends Controller
                ]);
            }
        }*/
-    public function actionContact()
+    public function actionContactUs()
     {
-        $model = new ContactForm();
+            return $this->render('contact-us');
+    }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    public function actionCareers()
+    {
 
-            if ($model->sendEmail('safeboxsiam@gmail.com') && $model->sendEmail('info@safeboxasia.com')) {
-                Yii::$app->session->setFlash('successContact');
-                return $this->refresh();
-            } else {
-                //   echo 'ERROR!';
-                Yii::$app->session->setFlash('errorContact');
-                return $this->refresh();
-            }
-        } else {
-            return $this->render('contact', [
-                'model' => $model
-            ]);
-        }
+        return $this->render('careers');
+
     }
     public function actionEnquiry()
     {
@@ -179,25 +170,7 @@ class SiteController extends Controller
             ]);
         }
     }
-    /**
-     * Displays about page.
-     *
-     * @return mixed
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
 
-    /**
-     * Displays services page.
-     *
-     * @return mixed
-     */
-    public function actionServices()
-    {
-        return $this->render('services');
-    }
 
     /**
      * Displays character categories page.
@@ -210,13 +183,23 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays character list page.
+     * Displays project list page.
      *
      * @return mixed
      */
-    public function actionCharacterList()
+    public function actionProjects()
     {
-        return $this->render('characterList');
+        return $this->render('project-list');
+    }
+
+    /**
+     * Displays project detail page.
+     *
+     * @return mixed
+     */
+    public function actionProjectDetail()
+    {
+        return $this->render('project-detail');
     }
 
     /**
@@ -236,7 +219,7 @@ class SiteController extends Controller
      */
     public function actionCharacterView()
     {
-        return $this->render('productView');
+        return $this->render('characterView');
     }
 
     /**
@@ -244,30 +227,11 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionBlogCategory()
+    public function actionNews()
     {
-        return $this->render('blogCategory');
+        return $this->render('news');
     }
 
-    /**
-     * Displays study trip list page.
-     *
-     * @return mixed
-     */
-    public function actionBlogList()
-    {
-        return $this->render('blogList');
-    }
-
-    /**
-     * Displays study trip list page.
-     *
-     * @return mixed
-     */
-    public function actionBlogView()
-    {
-        return $this->render('blogView');
-    }
 
     /**
      * Signs user up.
