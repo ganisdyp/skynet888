@@ -51,6 +51,9 @@ use common\models\ProjectPhoto;
                 <div class="tab-content">
                     <div id="english" class="tab-pane fade in active">
                         <br>
+                        <div class="col-md-12">
+                            <?= $form->field($model, 'status')->dropDownList([ 'Active' => 'Published', 'Inactive' => 'Unpublished', ], ['prompt' => '']) ?>
+                        </div>
                         <div class="col-md-6">
                             <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
                         </div>

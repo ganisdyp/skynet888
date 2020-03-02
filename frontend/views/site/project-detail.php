@@ -60,8 +60,10 @@ $screenshots = $dataProvider_screenshot->query->where(['project_id' => $_GET["id
                 <div id="sec-story">
                     <div class="project-section-head">Story</div>
                     <div class="card-body">
+                        <?php if(isset($story)){?>
                         <p><?= $story->name; ?></p>
                         <p><?= $story->description; ?></p>
+                        <?php } ?>
                     </div>
                 </div>
                 <div id="sec-character">

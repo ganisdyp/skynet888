@@ -1,16 +1,16 @@
 <?php
 
-namespace common\models;
+namespace backend\modules\content\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Project;
+use common\models\Projectov;
 
 /**
- * ProjectSearch represents the model behind the search form of `common\models\Project`.
+ * HomeContentSearch represents the model behind the search form of `common\models\HomeContent`.
  */
-class ProjectSearch extends Project
+class ProjectovSearch extends Projectov
 {
     /**
      * @inheritdoc
@@ -19,7 +19,7 @@ class ProjectSearch extends Project
     {
         return [
             [['id'], 'integer'],
-            [[ 'main_photo','status'], 'safe'],
+            [['date_published'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class ProjectSearch extends Project
      */
     public function search($params)
     {
-        $query = Project::find();
+        $query = Projectov::find();
 
         // add conditions that should always apply here
 
@@ -60,10 +60,8 @@ class ProjectSearch extends Project
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'date_published' => $this->date_published,
         ]);
-
-        $query->andFilterWhere(['like', 'main_photo', $this->main_photo])
-        ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }

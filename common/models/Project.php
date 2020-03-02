@@ -63,7 +63,7 @@ class Project extends \yii\db\ActiveRecord
         return [
 
             [['name', 'description'], 'required'],
-            [['main_photo', 'name'], 'string', 'max' => 100],
+            [['main_photo', 'name', 'status'], 'string', 'max' => 100],
             [['main_photo_file'], 'file', 'skipOnEmpty' => true, 'on' => 'update', 'extensions' => 'jpg,png,gif'],
             [['description'], 'string'],
 
@@ -80,6 +80,7 @@ class Project extends \yii\db\ActiveRecord
 
             'id' => Yii::t('common', 'ID'),
             'main_photo' => Yii::t('common', 'Main Photo'),
+            'status' => Yii::t('common', 'Status'),
         ];
     }
 

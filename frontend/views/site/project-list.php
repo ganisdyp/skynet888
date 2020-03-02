@@ -5,7 +5,7 @@ define('PAGE_NAME', 'projects');
 
 $searchModel_project = new ProjectSearch();
 $dataProvider_project = $searchModel_project->search(Yii::$app->request->queryParams);
-$projects = $dataProvider_project->query->where([])->all();
+$projects = $dataProvider_project->query->where(['status'=>'Active'])->all();
 ?>
 <div id="page-content">
   <div class="container">
