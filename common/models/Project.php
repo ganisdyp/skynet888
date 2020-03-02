@@ -19,6 +19,7 @@ use Yii;
 class Project extends \yii\db\ActiveRecord
 {
     public $main_photo_file;
+
     public function behaviors()
     {
         return [
@@ -36,8 +37,8 @@ class Project extends \yii\db\ActiveRecord
                 'attributes' => ['name', 'description']
 
             ],
-          //  TimestampBehavior::className(),
-          //  BlameableBehavior::className(),
+            //  TimestampBehavior::className(),
+            //  BlameableBehavior::className(),
         ];
     }
 
@@ -61,9 +62,9 @@ class Project extends \yii\db\ActiveRecord
     {
         return [
 
-            [['name','description'], 'required'],
-            [['main_photo','name'], 'string', 'max' => 100],
-            [['main_photo_file'],'file','skipOnEmpty' => true, 'on' => 'update', 'extensions' => 'jpg,png,gif'],
+            [['name', 'description'], 'required'],
+            [['main_photo', 'name'], 'string', 'max' => 100],
+            [['main_photo_file'], 'file', 'skipOnEmpty' => true, 'on' => 'update', 'extensions' => 'jpg,png,gif'],
             [['description'], 'string'],
 
 
@@ -93,9 +94,41 @@ class Project extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getStory()
+    {
+        return $this->hasOne(Story::className(), ['project_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getCharacters()
     {
         return $this->hasMany(Character::className(), ['project_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEnvironments()
+    {
+        return $this->hasMany(Environment::className(), ['project_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getMovies()
+    {
+        return $this->hasMany(Movie::className(), ['project_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getScreenshots()
+    {
+        return $this->hasMany(Screenshot::className(), ['project_id' => 'id']);
     }
 
     public function getProjectPhotos()
@@ -106,8 +139,9 @@ class Project extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getActivities()
+    public function getBlogs()
     {
         return $this->hasMany(Blog::className(), ['project_id' => 'id']);
     }
+
 }

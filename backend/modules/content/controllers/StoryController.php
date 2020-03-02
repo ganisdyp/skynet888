@@ -2,6 +2,7 @@
 
 namespace backend\modules\content\controllers;
 
+use backend\modules\content\models\ProjectSearch;
 use Yii;
 use yii\base\Model;
 use common\models\Story;
@@ -86,7 +87,7 @@ class StoryController extends Controller
                 }
                 $model->save();
 
-                    return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
 
             }
         }
@@ -181,5 +182,29 @@ class StoryController extends Controller
         throw new NotFoundHttpException(Yii::t('backend', 'The requested page does not exist.'));
     }
 
+    function actionLoadstory()
+    {
+
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();;
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $out = [];
+            if (isset($data['project_id'])) {
+                $project_id = $data['project_id'];
+                  $searchModel_project = new ProjectSearch();
+                  $dataProvider_project = $searchModel_project->search(Yii::$app->request->queryParams);
+                  $project = $dataProvider_project->query->where(['id' => $project_id])->one();
+                  $story = $project->story;
+
+                    if (isset($story)) {
+                        $story = $story->id.' ||| '.$story->name;
+                    } else {
+                        $story = null;
+                    }
+                $out[] = $story;
+            }
+            return $out;
+        }
+    }
 
 }

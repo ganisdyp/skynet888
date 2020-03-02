@@ -171,7 +171,7 @@ use dosamigos\tinymce\TinyMce;
         <div class="col-md-4">
             <div class="col-md-12">
                 <br>
-                <?= $form->field($model, 'project_id')->dropDownList(ArrayHelper::map(ProjectLang::find()->all(), 'project_id', 'name'), ['prompt' => '- Select -'])->label('Related Project') ?>
+                <?= $form->field($model, 'project_id')->dropDownList(ArrayHelper::map(ProjectLang::find()->all(), 'project_id', 'name'), ['prompt' => '- Select -','onchange' => 'checkEnvironmentExistence(this.value)'])->label('Related Project') ?>
             </div>
         </div>
     </div>

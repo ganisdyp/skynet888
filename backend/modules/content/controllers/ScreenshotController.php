@@ -2,6 +2,7 @@
 
 namespace backend\modules\content\controllers;
 
+use backend\modules\content\models\ProjectSearch;
 use Yii;
 use yii\base\Model;
 use common\models\Screenshot;
@@ -86,7 +87,7 @@ class ScreenshotController extends Controller
                 }
                 $model->save();
 
-                    return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
 
             }
         }
@@ -177,5 +178,31 @@ class ScreenshotController extends Controller
         }
     }
 
+    function actionLoadscreenshot()
+    {
+
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();;
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $out = [];
+            if (isset($data['project_id'])) {
+                $project_id = $data['project_id'];
+                $searchModel_screenshot = new ScreenshotSearch();
+                $dataProvider_screenshot = $searchModel_screenshot->search(Yii::$app->request->queryParams);
+                $screenshots = $dataProvider_screenshot->query->where(['project_id' => $project_id])->all();
+                if (isset($screenshots)) {
+                    foreach ($screenshots as $screenshot) {
+
+                        $out[] = $screenshot->id.' ||| '.$screenshot->main_photo;
+                    }
+                } else {
+                    $screenshots = null;
+                    $out[] = $screenshots;
+                }
+
+            }
+            return $out;
+        }
+    }
 
 }

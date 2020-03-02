@@ -1,5 +1,6 @@
 <?php
-
+use yii\helpers\Url;
+use yii\helpers\Html;
 ?>
 <div id="sidebar-nav-wrapper">
     <ul class="sidebar-nav">
@@ -28,6 +29,8 @@ echo '<div class="view-content">';
             <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
             <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
             <li><a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a></li>
+            <?= '<li>'.Html::a('TH', Url::current(['language' => 'th-TH']), ['class' => ''.(Yii::$app->request->cookies['language']=='th-TH' ? 'active' : '')]); ?>
+            <?= '<li>'.Html::a('EN', Url::current(['language' => 'en-UK']), ['class' => ''.(Yii::$app->request->cookies['language']=='en-UK' ? 'active' : '')]); ?>
         </ul>
     </div>
     <div id="top-menu-wrapper" class="justify-content-between">

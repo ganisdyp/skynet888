@@ -1,5 +1,7 @@
 <?php
 
+use common\models\Project;
+use common\models\ProjectSearch;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\ProjectLang;
@@ -79,7 +81,7 @@ use dosamigos\tinymce\TinyMce;
         <div class="col-md-4">
             <div class="col-md-12">
                 <br>
-                <?= $form->field($model, 'project_id')->dropDownList(ArrayHelper::map(ProjectLang::find()->all(), 'project_id', 'name'), ['prompt' => '- Select -'])->label('Related Project') ?>
+                <?= $form->field($model, 'project_id')->dropDownList(ArrayHelper::map(ProjectLang::find()->all(), 'project_id', 'name'), ['prompt' => '- Select -','onchange' => 'checkStoryExistence(this.value)'])->label('Related Project') ?>
             </div>
         </div>
     </div>
@@ -178,7 +180,7 @@ use dosamigos\tinymce\TinyMce;
 
         <div class="form-group col-md-12 text-right">
             <hr style="border-top: 1px solid #c8c8c8;">
-            <?= Html::submitButton(Yii::t('backend', 'Save'), ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton(Yii::t('backend', 'Save'), ['id'=>'submit-button','class' => 'btn btn-success']) ?>
         </div>
 
         <?php ActiveForm::end();

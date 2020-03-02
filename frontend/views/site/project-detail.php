@@ -110,7 +110,7 @@ $screenshots = $dataProvider_screenshot->query->where(['project_id' => $_GET["id
                     </div>
                 </div>
                 <div id="sec-movie">
-                    <div class="project-section-head">Moive/Trailer</div>
+                    <div class="project-section-head">Movie/Trailer</div>
                     <div class="card-body">
                         <div class="row">
                             <?php foreach ($movies as $movie) { ?>
@@ -132,7 +132,7 @@ $screenshots = $dataProvider_screenshot->query->where(['project_id' => $_GET["id
                             <?php foreach ($screenshots as $screenshot) { ?>
                                 <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
                                      data-animation="fadeIn">
-                                    <a class="d-block" data-fancybox="screentshot" href="../backend/uploads/screenshot/<?= $screenshot->main_photo;?>"
+                                    <a class="d-block" data-fancybox="screenshot" href="../backend/uploads/screenshot/<?= $screenshot->main_photo;?>"
                                        data-caption="">
                                         <img class="img-fluid" src="../backend/uploads/screenshot/<?= $screenshot->main_photo;?>">
                                     </a>

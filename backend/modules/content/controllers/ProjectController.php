@@ -2,6 +2,7 @@
 
 namespace backend\modules\content\controllers;
 
+use common\models\Story;
 use Yii;
 use yii\base\Model;
 use common\models\Project;
@@ -86,7 +87,7 @@ class ProjectController extends Controller
         }
 
         return $this->render('create', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
@@ -100,7 +101,7 @@ class ProjectController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+    //    $story = new Story();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -128,6 +129,7 @@ class ProjectController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+      //      'story' => $story
             ]);
     }
 

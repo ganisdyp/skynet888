@@ -2,11 +2,11 @@
 
 namespace backend\modules\content\controllers;
 
+use backend\modules\content\models\EnvironmentSearch;
 use Yii;
 use yii\base\Model;
 use common\models\Environment;
 use common\models\EnvironmentPhoto;
-use backend\modules\content\models\EnvironmentSearch;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -350,5 +350,32 @@ class EnvironmentController extends Controller
         throw new NotFoundHttpException(Yii::t('backend', 'The requested page does not exist.'));
     }
 
+
+    function actionLoadenvironment()
+    {
+
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();;
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $out = [];
+            if (isset($data['project_id'])) {
+                $project_id = $data['project_id'];
+                $searchModel_environment = new EnvironmentSearch();
+                $dataProvider_environment = $searchModel_environment->search(Yii::$app->request->queryParams);
+                $environments = $dataProvider_environment->query->where(['project_id' => $project_id])->all();
+                if (isset($environments)) {
+                    foreach ($environments as $environment) {
+
+                        $out[] = $environment->id.' ||| '.$environment->main_photo;
+                    }
+                } else {
+                    $environments = null;
+                    $out[] = $environments;
+                }
+
+            }
+            return $out;
+        }
+    }
 
 }
