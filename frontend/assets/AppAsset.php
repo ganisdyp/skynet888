@@ -34,7 +34,7 @@ class AppAsset extends AssetBundle
         'lib/lightbox2/lightbox.min.js',
         'lib/fancybox/jquery.fancybox.min.js',
         'lib/waypoint/jquery.waypoints.min.js',
-        'js/jquery-3.2.1.min.js',
+      //  'js/jquery-3.2.1.min.js',
         'js/script.js',
 
     ];

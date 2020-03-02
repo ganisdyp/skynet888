@@ -13,7 +13,6 @@ use omgdef\multilingual\MultilingualQuery;
  * @property string $date_published
  *
  * @property ProjectovLang[] $projectovLangs
- * @property ProjectovPhoto[] $projectovPhotos
  */
 class Projectov extends \yii\db\ActiveRecord
 {
@@ -83,11 +82,4 @@ class Projectov extends \yii\db\ActiveRecord
         return $this->hasMany(ProjectovLang::className(), ['projectov_id' => 'id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProjectovPhotos()
-    {
-        return $this->hasMany(ProjectovPhoto::className(), ['projectov_id' => 'id']);
-    }
 }

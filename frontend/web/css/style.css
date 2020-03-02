@@ -311,6 +311,28 @@ a {
   text-align: left;
 }
 
+.media-wrapper {
+  position: relative;
+  background-position: bottom center;
+  background: #999;
+  background-size: cover;
+  color: #fff;
+}
+
+.media-overlay {
+  background: rgba(0, 33, 71, 0.1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.project-content :target::before {
+  content: "";
+  display: block;
+  height: 160px; /* fixed header height*/
+  margin: -160px 0 0; /* negative fixed header height */
+}
 /* for tablet and mobile size */
 @media only screen and (max-width: 1200px) {
   #page-content {

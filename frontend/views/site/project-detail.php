@@ -120,7 +120,10 @@ $screenshots = $dataProvider_screenshot->query->where(['project_id' => $_GET["id
                                      data-animation="fadeIn">
                                     <a class="d-block" data-fancybox="movie" href="<?= $movie->main_photo;?>"
                                        data-caption="<?= $movie->description;?>">
-                                        <iframe class="img-fluid" width="560" height="315" src="<?= $movie->main_photo;?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                        <div class="media-wrapper">
+                                        <iframe class="img-fluid" src="<?= $movie->main_photo;?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            <div class="media-overlay"></div>
+                                        </div>
                                     </a>
                                 </div>
                             <?php } ?>
@@ -147,62 +150,67 @@ $screenshots = $dataProvider_screenshot->query->where(['project_id' => $_GET["id
         </div>
     </div>
 </div>
-
-<script>
+<?php $this->registerJs("
+   
     // waypoint for project detail page
-    $(document).ready(function () {
-        // Make navbtn active when page is scrolled down to slide
-        $('#sec-story').waypoint(function (down) {
-            $('.nav-item.active').removeClass('active'); // remove the class from the currently selected
-            $('#nav-story').addClass('active'); // add the class to the newly clicked link
-        });
+  $(document).ready(function () {
+    var offset = $('.project-content :target').offset();
+    if(offset) {
+      var scrollto = offset.top - 100; // minus fixed header height
+      $('html, body').animate({scrollTop:scrollto}, 0);
+    }
 
-        $('#sec-character').waypoint(function (down) {
-            $('.nav-item.active').removeClass('active');
-            $('#nav-character').addClass('active');
-        });
+    // Make navbtn active when page is scrolled down to slide
+    $('#sec-story').waypoint(function (down) {
+      $('.nav-item.active').removeClass('active'); // remove the class from the currently selected
+      $('#nav-story').addClass('active'); // add the class to the newly clicked link
+    }, { offset: 200 });
 
-        $('#sec-environment').waypoint(function (down) {
-            $('.nav-item.active').removeClass('active');
-            $('#nav-environment').addClass('active');
-        });
+    $('#sec-character').waypoint(function (down) {
+      $('.nav-item.active').removeClass('active');
+      $('#nav-character').addClass('active');
+    }, { offset: 200 });
 
-        $('#sec-movie').waypoint(function (down) {
-            $('.nav-item.active').removeClass('active');
-            $('#nav-movie').addClass('active');
-        });
+    $('#sec-environment').waypoint(function (down) {
+      $('.nav-item.active').removeClass('active');
+      $('#nav-environment').addClass('active');
+    }, { offset: 200 });
 
-        $('#sec-screenshot').waypoint(function (down) {
-            $('.nav-item.active').removeClass('active');
-            $('#nav-screenshot').addClass('active');
-        });
-    });
+    $('#sec-movie').waypoint(function (down) {
+      $('.nav-item.active').removeClass('active');
+      $('#nav-movie').addClass('active');
+    }, { offset: 200 });
 
-    $(document).ready(function () {
-        // Make navbtn active when page is scrolled up to slide
-        $('#sec-story').waypoint(function (up) {
-            $('.nav-item.active').removeClass('active');
-            $('#nav-story').addClass('active');
-        }, {offset: -1});
+    $('#sec-screenshot').waypoint(function (down) {
+      $('.nav-item.active').removeClass('active');
+      $('#nav-screenshot').addClass('active');
+    }, { offset: 200 });
 
-        $('#sec-character').waypoint(function (up) {
-            $('.nav-item.active').removeClass('active');
-            $('#nav-character').addClass('active');
-        }, {offset: -1});
+    // Make navbtn active when page is scrolled up to slide
+    $('#sec-story').waypoint(function (up) {
+      $('.nav-item.active').removeClass('active');
+      $('#nav-story').addClass('active');
+    }, { offset: -150 });
 
-        $('#sec-environment').waypoint(function (up) {
-            $('.nav-item.active').removeClass('active');
-            $('#nav-environment').addClass('active');
-        }, {offset: -1});
+    $('#sec-character').waypoint(function (up) {
+      $('.nav-item.active').removeClass('active');
+      $('#nav-character').addClass('active');
+    }, { offset: -150 });
 
-        $('#sec-movie').waypoint(function (up) {
-            $('.nav-item.active').removeClass('active');
-            $('#nav-movie').addClass('active');
-        }, {offset: -1});
+    $('#sec-environment').waypoint(function (up) {
+      $('.nav-item.active').removeClass('active');
+      $('#nav-environment').addClass('active');
+    }, { offset: -150 });
 
-        $('#sec-screenshot').waypoint(function (up) {
-            $('.nav-item.active').removeClass('active');
-            $('#nav-screenshot').addClass('active');
-        }, {offset: -1});
-    });
-</script>
+    $('#sec-movie').waypoint(function (up) {
+      $('.nav-item.active').removeClass('active');
+      $('#nav-movie').addClass('active');
+    }, { offset: -150 });
+
+    $('#sec-screenshot').waypoint(function (up) {
+      $('.nav-item.active').removeClass('active');
+      $('#nav-screenshot').addClass('active');
+    }, { offset: -150 });
+  });
+    ");
+?>

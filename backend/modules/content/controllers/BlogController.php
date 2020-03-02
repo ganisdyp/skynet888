@@ -137,8 +137,11 @@ class BlogController extends Controller
                         $modelDetail->blog_id = $model->id;
                         $modelDetail->save();
                     }
-
-                    return $this->redirect(['view', 'id' => $model->id]);
+                    Yii::$app->getSession()->setFlash('alert', [
+                        'body' => '<i class="fa fa-check"></i> Update Succesfully',
+                        'options' => ['class' => 'alert-success']
+                    ]);
+                    return $this->redirect(['update', 'id' => $model->id]);
                 }
             }
             //return $this->redirect(['view', 'id' => $model->id]);

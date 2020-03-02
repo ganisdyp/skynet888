@@ -225,6 +225,10 @@ class AboutController extends Controller
 
                     }
                 }
+                Yii::$app->getSession()->setFlash('alert', [
+                    'body' => '<i class="fa fa-check"></i> Update Succesfully',
+                    'options' => ['class' => 'alert-success']
+                ]);
                 return $this->redirect(['update', 'id' => $model->id]);
             }
         }
