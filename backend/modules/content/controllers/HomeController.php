@@ -4,18 +4,18 @@ namespace backend\modules\content\controllers;
 
 use Yii;
 use yii\base\Model;
-use common\models\About;
-use common\models\AboutPhoto;
-use backend\modules\content\models\AboutSearch;
+use common\models\Home;
+use common\models\HomePhoto;
+use backend\modules\content\models\HomeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 
 /**
- * AboutContentController implements the CRUD actions for AboutContent model.
+ * HomeContentController implements the CRUD actions for HomeContent model.
  */
-class AboutController extends Controller
+class HomeController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,12 +33,12 @@ class AboutController extends Controller
     }
 
     /**
-     * Lists all AboutContent models.
+     * Lists all HomeContent models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new AboutSearch();
+        $searchModel = new HomeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -48,7 +48,7 @@ class AboutController extends Controller
     }
 
     /**
-     * Displays a single AboutContent model.
+     * Displays a single HomeContent model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -61,17 +61,17 @@ class AboutController extends Controller
     }
 
     /**
-     * Creates a new AboutContent model.
+     * Creates a new HomeContent model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new About();
+        $model = new Home();
         $modelDetails = [];
-        $formDetails = Yii::$app->request->post('AboutPhoto', []);
+        $formDetails = Yii::$app->request->post('HomePhoto', []);
         foreach ($formDetails as $i => $formDetail) {
-            $modelDetail = new AboutPhoto(['scenario' => AboutPhoto::SCENARIO_BATCH_UPDATE]);
+            $modelDetail = new HomePhoto(['scenario' => HomePhoto::SCENARIO_BATCH_UPDATE]);
             $modelDetail->setAttributes($formDetail);
             $modelDetails[] = $modelDetail;
         }
@@ -79,8 +79,8 @@ class AboutController extends Controller
         //handling if the addRow button has been pressed
         if (Yii::$app->request->post('addRowPhoto') == 'true') {
             $model->load(Yii::$app->request->post());
-            $modelDetails[] = new AboutPhoto(['scenario' => AboutPhoto::SCENARIO_BATCH_UPDATE]);
-            $modelDetails[] = new AboutPhoto(['scenario' => AboutPhoto::SCENARIO_BATCH_UPDATE]);
+            $modelDetails[] = new HomePhoto(['scenario' => HomePhoto::SCENARIO_BATCH_UPDATE]);
+            $modelDetails[] = new HomePhoto(['scenario' => HomePhoto::SCENARIO_BATCH_UPDATE]);
 
             return $this->render('create', [
                 'model' => $model,
@@ -97,10 +97,10 @@ class AboutController extends Controller
                 $file = UploadedFile::getInstance($model, 'main_photo_file');
                 if (isset($file->size) && $file->size != 0) {
 
-                    $unique_name = "about_" . date("Y-m-d_H-i-s") . "_" . uniqid();
+                    $unique_name = "home_" . date("Y-m-d_H-i-s") . "_" . uniqid();
                     $path = $unique_name . ".{$file->extension}";
                     $model->main_photo = $path;
-                    $file->saveAs('uploads/about/' . $path);
+                    $file->saveAs('uploads/home/' . $path);
                 }
                 $model->save();
                 //  print_r($model);
@@ -109,14 +109,14 @@ class AboutController extends Controller
 
                     foreach ($modelDetails as $c => $modelDetail) {
 
-                        ${'profile_file' . $c} = UploadedFile::getInstance($modelDetail, '[' . $c . ']' . 'about_photo');
+                        ${'profile_file' . $c} = UploadedFile::getInstance($modelDetail, '[' . $c . ']' . 'home_photo');
                         if (isset(${'profile_file' . $c}->size) && ${'profile_file' . $c}->size != 0) {
 
-                            $unique_name = "about_" . date("Y-m-d_H-i-s") . "_". uniqid();
+                            $unique_name = "home_" . date("Y-m-d_H-i-s") . "_". uniqid();
                             $path = $unique_name . ".{${'profile_file' . $c}->extension}";
                             $modelDetail->photo_url = $path;
-                            ${'profile_file' . $c}->saveAs('uploads/about/related_photo/' . $path);
-                            $modelDetail->about_id = $model->id;
+                            ${'profile_file' . $c}->saveAs('uploads/home/related_photo/' . $path);
+                            $modelDetail->home_id = $model->id;
                             $modelDetail->save();
                         }
 
@@ -136,7 +136,7 @@ class AboutController extends Controller
     }
 
     /**
-     * Updates an existing AboutContent model.
+     * Updates an existing HomeContent model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -145,20 +145,20 @@ class AboutController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $modelDetails = $model->aboutPhotos;
+        $modelDetails = $model->homePhotos;
 
-        $formDetails = Yii::$app->request->post('AboutPhoto', []);
+        $formDetails = Yii::$app->request->post('HomePhoto', []);
         foreach ($formDetails as $i => $formDetail) {
             //loading the models if they are not new
-            if (isset($formDetail['id']) && isset($formDetail['updateType']) && $formDetail['updateType'] != AboutPhoto::UPDATE_TYPE_CREATE) {
+            if (isset($formDetail['id']) && isset($formDetail['updateType']) && $formDetail['updateType'] != HomePhoto::UPDATE_TYPE_CREATE) {
                 //making sure that it is actually a child of the main model
-                $modelDetail = AboutPhoto::findOne(['id' => $formDetail['id'], 'about_id' => $model->id]);
-                $modelDetail->setScenario(AboutPhoto::SCENARIO_BATCH_UPDATE);
+                $modelDetail = HomePhoto::findOne(['id' => $formDetail['id'], 'home_id' => $model->id]);
+                $modelDetail->setScenario(HomePhoto::SCENARIO_BATCH_UPDATE);
                 $modelDetail->setAttributes($formDetail);
                 $modelDetails[$i] = $modelDetail;
                 //validate here if the modelDetail loaded is valid, and if it can be updated or deleted
             } else {
-                $modelDetail = new AboutPhoto(['scenario' => AboutPhoto::SCENARIO_BATCH_UPDATE]);
+                $modelDetail = new HomePhoto(['scenario' => HomePhoto::SCENARIO_BATCH_UPDATE]);
                 $modelDetail->setAttributes($formDetail);
                 $modelDetails[] = $modelDetail;
             }
@@ -168,8 +168,8 @@ class AboutController extends Controller
 
         //handling if the addRow button has been pressed
         if (Yii::$app->request->post('addRowPhoto') == 'true') {
-            $modelDetails[] = new AboutPhoto(['scenario' => AboutPhoto::SCENARIO_BATCH_UPDATE]);
-            $modelDetails[] = new AboutPhoto(['scenario' => AboutPhoto::SCENARIO_BATCH_UPDATE]);
+            $modelDetails[] = new HomePhoto(['scenario' => HomePhoto::SCENARIO_BATCH_UPDATE]);
+            $modelDetails[] = new HomePhoto(['scenario' => HomePhoto::SCENARIO_BATCH_UPDATE]);
 
             return $this->render('update', [
                 'model' => $model,
@@ -186,17 +186,17 @@ class AboutController extends Controller
                 //print_r($file);
                 if (isset($file->size) && $file->size !== 0) {
                     //   $model->main_photo = $file->baseName . '.' . $file->extension;
-                    //   $file->saveAs('uploads/about/' . $file->baseName . '.' . $file->extension);
+                    //   $file->saveAs('uploads/home/' . $file->baseName . '.' . $file->extension);
                     $old_name = $model->main_photo;
-                    $unique_name = "about_" . date("Y-m-d_H-i-s") . "_" . uniqid();
+                    $unique_name = "home_" . date("Y-m-d_H-i-s") . "_" . uniqid();
                     $path = $unique_name . ".{$file->extension}";
                     $model->main_photo = $path;
-                    $file->saveAs('uploads/about/' . $path);
+                    $file->saveAs('uploads/home/' . $path);
                     if (isset($old_name)) {
                         if($old_name==''){
 
                         }else{
-                        unlink('uploads/about/' . $old_name);}
+                        unlink('uploads/home/' . $old_name);}
                     } else {
                         // Do nothing
                     }
@@ -204,25 +204,25 @@ class AboutController extends Controller
                 $model->save();
                 foreach ($modelDetails as $c => $modelDetail) {
                     //details that has been flagged for deletion will be deleted
-                    if ($modelDetail->updateType == AboutPhoto::UPDATE_TYPE_DELETE) {
+                    if ($modelDetail->updateType == HomePhoto::UPDATE_TYPE_DELETE) {
                         $modelDetail->delete();
                     } else {
                         //new or updated records go here
-                        ${'profile_file' . $c} = UploadedFile::getInstance($modelDetail, '[' . $c . ']' . 'about_photo');
+                        ${'profile_file' . $c} = UploadedFile::getInstance($modelDetail, '[' . $c . ']' . 'home_photo');
                         if (isset(${'profile_file' . $c}->size) && ${'profile_file' . $c}->size != 0) {
                             //    $modelDetail->photo_url = ${'profile_file' . $c}->baseName . '.' . ${'profile_file' . $c}->extension;
-                            //   ${'profile_file' . $c}->saveAs('uploads/about/related_photo/' . ${'profile_file' . $c}->baseName . '.' . ${'profile_file' . $c}->extension);
+                            //   ${'profile_file' . $c}->saveAs('uploads/home/related_photo/' . ${'profile_file' . $c}->baseName . '.' . ${'profile_file' . $c}->extension);
                             $old_name = $modelDetail->photo_url;
-                            $unique_name = "about_" . date("Y-m-d_H-i-s") . "_" . uniqid();
+                            $unique_name = "home_" . date("Y-m-d_H-i-s") . "_" . uniqid();
                             $path = $unique_name . ".{${'profile_file' . $c}->extension}";
                             $modelDetail->photo_url = $path;
-                            ${'profile_file' . $c}->saveAs('uploads/about/related_photo/' . $path);
+                            ${'profile_file' . $c}->saveAs('uploads/home/related_photo/' . $path);
                             if (isset($old_name)) {
-                                unlink('uploads/about/related_photo/' . $old_name);
+                                unlink('uploads/home/related_photo/' . $old_name);
                             } else {
                                 // Do nothing
                             }
-                            $modelDetail->about_id = $model->id;
+                            $modelDetail->home_id = $model->id;
                             $modelDetail->save();
                         }
 
@@ -246,7 +246,7 @@ class AboutController extends Controller
     }
 
     /**
-     * Deletes an existing AboutContent model.
+     * Deletes an existing HomeContent model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -260,15 +260,15 @@ class AboutController extends Controller
     }
 
     /**
-     * Finds the AboutContent model based on its primary key value.
+     * Finds the HomeContent model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return About the loaded model
+     * @return Home the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = About::find()->multilingual()->where(['about.id'=>$id])->one()) !== null) {
+        if (($model = Home::find()->multilingual()->where(['home.id'=>$id])->one()) !== null) {
             return $model;
         }
 

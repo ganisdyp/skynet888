@@ -218,7 +218,10 @@ class BlogController extends Controller
                     $model->main_photo = $path;
                     $file->saveAs('uploads/blog/' . $path);
                     if (isset($old_name)) {
-                        unlink('uploads/blog/' . $old_name);
+                        if($old_name==''){
+
+                        }else{
+                        unlink('uploads/blog/' . $old_name);}
                     } else {
                         // Do nothing
                     }

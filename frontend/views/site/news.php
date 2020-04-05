@@ -12,7 +12,7 @@ $related_photos = $news->getBlogPhotos()->where(['blog_id' => $news->id])->all()
 <div id="page-content">
     <div class="container">
         <div class="row mt-5">
-            <div class="col-lg-8 col-md-7 col-12 order-md-1 order-2">
+            <div class="col-lg-8 col-md-7 col-12">
                 <img class="img-fluid" src="../backend/uploads/blog/<?= $news->main_photo;?>">
                 <div style="margin-bottom:20px;"></div>
                 <?php foreach($related_photos as $photo){ ?>
@@ -20,7 +20,7 @@ $related_photos = $news->getBlogPhotos()->where(['blog_id' => $news->id])->all()
                     <div style="margin-bottom:20px;"></div>
                 <?php } ?>
             </div>
-            <div class="col-lg-4 col-md-5 col-12 order-md-2 order-1">
+            <div class="col-lg-4 col-md-5 col-12">
                 <div class="side-box bg-white-trans d-md-block d-none">
                     <div class="card-body">
                         <p><?= $news->headline ?></p>

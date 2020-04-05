@@ -78,6 +78,7 @@ class SiteController extends Controller
             'name' => 'description',
             'content' => 'Safe Box Siam is a new company that aims at providing high quality safes and technical services to its clients. We will also be the one stop office solution to your business by providing a full comprehensive range of equipments'
         ]);
+        $this->view->title = 'Skynet888Studios';
 
         return $this->render('index');
     }
@@ -139,14 +140,20 @@ class SiteController extends Controller
                ]);
            }
        }*/
+    public function actionAboutUs()
+    {
+        $this->view->title = 'About Us';
+        return $this->render('about-us');
+    }
     public function actionContactUs()
     {
+        $this->view->title = 'Contact Us';
             return $this->render('contact-us');
     }
 
     public function actionCareers()
     {
-
+        $this->view->title = 'Careers';
         return $this->render('careers');
 
     }
@@ -189,6 +196,7 @@ class SiteController extends Controller
      */
     public function actionProjects()
     {
+        $this->view->title = 'Projects';
         return $this->render('project-list');
     }
 
@@ -199,6 +207,7 @@ class SiteController extends Controller
      */
     public function actionProjectDetail()
     {
+        $this->view->title = 'Project Details';
         return $this->render('project-detail');
     }
 
@@ -229,6 +238,7 @@ class SiteController extends Controller
      */
     public function actionNews()
     {
+        $this->view->title = 'News';
         return $this->render('news');
     }
 

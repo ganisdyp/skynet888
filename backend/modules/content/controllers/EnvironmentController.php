@@ -194,7 +194,10 @@ class EnvironmentController extends Controller
                     $model->main_photo = $path;
                     $file->saveAs('uploads/environment/' . $path);
                     if (isset($old_name)) {
-                        unlink('uploads/environment/' . $old_name);
+                        if($old_name==''){
+
+                        }else{
+                        unlink('uploads/environment/' . $old_name);}
                     } else {
                         // Do nothing
                     }

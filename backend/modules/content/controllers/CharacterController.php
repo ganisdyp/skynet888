@@ -194,7 +194,11 @@ class CharacterController extends Controller
                     $model->main_photo = $path;
                     $file->saveAs('uploads/character/' . $path);
                     if (isset($old_name)) {
+                        if($old_name==''){
+
+                        }else{
                         unlink('uploads/character/' . $old_name);
+                        }
                     } else {
                         // Do nothing
                     }

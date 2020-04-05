@@ -39,6 +39,12 @@
                         'url' => '#',
                         'items' => [
                             [
+                                'label' => 'Index',
+                                'icon' => 'home',
+                                'url' => ['/content/home/update?id=1'],
+
+                            ],
+                            [
                                 'label' => 'About Us',
                                 'icon' => 'commenting',
                                 'url' => ['/content/about/update?id=1'],

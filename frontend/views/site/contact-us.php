@@ -12,13 +12,13 @@ $related_photos = $contact->getContactPhotos()->where(['contact_id' => $contact-
 <div id="page-content">
   <div class="container">
       <div class="row mt-5">
-          <div class="col-lg-8 col-md-7 col-12 order-md-1 order-2">
+          <div class="col-lg-8 col-md-7 col-12">
               <?php foreach($related_photos as $photo){ ?>
                   <img class="img-fluid" src="../backend/uploads/contact/related_photo/<?= $photo->photo_url;?>">
                   <div style="margin-bottom:20px;"></div>
               <?php } ?>
           </div>
-          <div class="col-lg-4 col-md-5 col-12 order-md-2 order-1">
+          <div class="col-lg-4 col-md-5 col-12">
               <div class="side-box bg-white-trans d-md-block d-none">
                   <div class="card-body">
                       <p><?= $contact->content; ?></p>

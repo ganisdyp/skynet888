@@ -59,7 +59,7 @@ return [
                 'careers' => 'site/careers',
                 'contact-us' => 'site/contact-us',*/
                 // 'google73f535a0783b0f56.html' => 'site/google',
-                 '<alias:index|projects|news|careers|contact-us|project-detail>' => 'site/<alias>',
+                 '<alias:index|about-us|projects|news|careers|contact-us|project-detail>' => 'site/<alias>',
                 // 'accommodation' => 'accommodation/default/index',
                 '<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
 

@@ -15,7 +15,7 @@ return [
     'help' => null,
     'sourcePath' => '@common',
     'messagePath' => '@common/messages',
-    'languages' => ['en','th'],
+    'languages' => ['th','en'],
     'translator' => 'Yii::t',
     'sort' => false,
     'overwrite' => true,

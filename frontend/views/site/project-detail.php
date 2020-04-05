@@ -38,14 +38,10 @@ $screenshots = $dataProvider_screenshot->query->where(['project_id' => $_GET["id
             <div class="col-12">
                 <div id="float-menu-wrapper">
                     <ul id="project-menu" class="navbar-nav">
-                        <li id="nav-story" class="nav-item active"><a class="nav-link"
-                                                                      href="#sec-story"><span>Story</span></a></li>
-                        <li id="nav-character" class="nav-item"><a class="nav-link" href="#sec-character"><span>Characters</span></a>
-                        </li>
-                        <li id="nav-environment" class="nav-item"><a class="nav-link" href="#sec-environment"><span>Environment</span></a>
-                        </li>
-                        <li id="nav-movie" class="nav-item"><a class="nav-link"
-                                                               href="#sec-movie"><span>Moive/Trailer</span></a></li>
+                        <li id="nav-story" class="nav-item active"><a class="nav-link" href="#sec-story"><span>Story</span></a></li>
+                        <li id="nav-character" class="nav-item"><a class="nav-link" href="#sec-character"><span>Characters</span></a></li>
+                        <li id="nav-environment" class="nav-item"><a class="nav-link" href="#sec-environment"><span>Environment</span></a></li>
+                        <li id="nav-movie" class="nav-item"><a class="nav-link" href="#sec-movie"><span>Movie/Trailer</span></a></li>
                         <li id="nav-screenshot" class="nav-item"><a class="nav-link" href="#sec-screenshot"><span>Screenshot</span></a>
                         </li>
                     </ul>
@@ -86,10 +82,17 @@ $screenshots = $dataProvider_screenshot->query->where(['project_id' => $_GET["id
                             <?php foreach ($characters as $character) { ?>
                                 <div class="col-lg-4 col-md-6 col-12 my-2 item d03s fadeIn animated"
                                      data-animation="fadeIn">
-                                    <a class="d-block" data-fancybox="character" href="../backend/uploads/character/<?= $character->main_photo;?>"
+                                    <a class="d-block" data-fancybox="character-<?=$character->id?>" href="../backend/uploads/character/<?= $character->main_photo;?>"
                                        data-caption="<?= $character->description;?>">
                                         <img class="img-fluid" src="../backend/uploads/character/<?= $character->main_photo;?>">
                                     </a>
+                                    <div style="display: none;">
+                                        <?php
+                                   $photos = $character->getCharacterPhotos()->where(['character_id' => $character->id])->all();
+                                        foreach($photos as $photo){?>
+                                        <a href="<?= Yii::$app->getHomeUrl() . 'backend/uploads/character/related_photo/' . $photo->photo_url; ?>" data-fancybox="character-<?=$character->id?>" data-thumb="<?= Yii::$app->getHomeUrl() . 'backend/uploads/character/related_photo/' . $photo->photo_url; ?>"></a>
+                                  <?php } ?>
+                                    </div>
                                 </div>
                             <?php } ?>
                         </div>

@@ -123,8 +123,10 @@ class ScreenshotController extends Controller
                     $path = $unique_name . ".{$file->extension}";
                     $model->main_photo = $path;
                     $file->saveAs('uploads/screenshot/' . $path);
-                    if (isset($old_name)) {
-                        unlink('uploads/screenshot/' . $old_name);
+                    if (isset($old_name)) {if($old_name==''){
+
+                    }else{
+                        unlink('uploads/screenshot/' . $old_name);}
                     } else {
                         // Do nothing
                     }

@@ -193,8 +193,10 @@ class MovieController extends Controller
                     $path = $unique_name . ".{$file->extension}";
                     $model->main_photo = $path;
                     $file->saveAs('uploads/movie/' . $path);
-                    if (isset($old_name)) {
-                        unlink('uploads/movie/' . $old_name);
+                    if (isset($old_name)) {if($old_name==''){
+
+                    }else{
+                        unlink('uploads/movie/' . $old_name);}
                     } else {
                         // Do nothing
                     }

@@ -114,7 +114,11 @@ class ProjectController extends Controller
                     $model->main_photo = $path;
                     $file->saveAs('uploads/project/' . $path);
                     if (isset($old_name)) {
-                        unlink('uploads/project/' . $old_name);
+                        if($old_name==''){
+
+                        }else {
+                            unlink('uploads/project/' . $old_name);
+                        }
                     } else {
                         // Do nothing
                     }

@@ -12,9 +12,11 @@ use yii\helpers\Html;
             <li class="nav-item  <?php echo (PAGE_NAME == 'careers') ? 'active' : ''; ?>"><a class="nav-link" href="careers">Careers</a></li>
             <li class="nav-item  <?php echo (PAGE_NAME == 'contact-us') ? 'active' : ''; ?>"><a class="nav-link" href="contact-us">Contact</a></li>
             <ul id="social-mobile" class="navbar-nav flex-row justify-content-center">
-                <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
-                <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                <li><a href="https://www.facebook.com/skynet888studio/" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
+                <li><a href="https://www.instagram.com/skynet888studios/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://www.youtube.com/channel/UCMMnzvIzjUM0DO-PY7Mienw/" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                <?= '<li>'.Html::a('TH', Url::current(['language' => 'th-TH']), ['class' => ''.(Yii::$app->request->cookies['language']=='th-TH' ? 'active' : '')]); ?>
+                <?= '<li>'.Html::a('EN', Url::current(['language' => 'en-UK']), ['class' => ''.(Yii::$app->request->cookies['language']=='en-UK' ? 'active' : '')]); ?>
             </ul>
         </ul>
     </ul>
@@ -26,9 +28,9 @@ echo '<div class="view-content">';
 <div id="navbar-menu-wrapper">
     <div id="upper-menu">
         <ul id="nav-social">
-            <li><a href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
-            <li><a href="https://www.instagram.com/" target="_blank"><i class="fab fa-instagram"></i></a></li>
-            <li><a href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube"></i></a></li>
+            <li><a href="https://www.facebook.com/skynet888studio/" target="_blank"><i class="fab fa-facebook-square"></i></a></li>
+            <li><a href="https://www.instagram.com/skynet888studios/" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            <li><a href="https://www.youtube.com/channel/UCMMnzvIzjUM0DO-PY7Mienw/" target="_blank"><i class="fab fa-youtube"></i></a></li>
             <?= '<li>'.Html::a('TH', Url::current(['language' => 'th-TH']), ['class' => ''.(Yii::$app->request->cookies['language']=='th-TH' ? 'active' : '')]); ?>
             <?= '<li>'.Html::a('EN', Url::current(['language' => 'en-UK']), ['class' => ''.(Yii::$app->request->cookies['language']=='en-UK' ? 'active' : '')]); ?>
         </ul>
@@ -36,11 +38,11 @@ echo '<div class="view-content">';
     <div id="top-menu-wrapper" class="justify-content-between">
         <i class="fa fa-bars toggle-btn" id="toggle-btn" aria-hidden="true"></i>
         <div class="top-menu-left d-flex">
-            <a class="navbar-brand" href="index.php">
+            <a class="navbar-brand" href="index">
                 <img id="nav-logo" src="../frontend/web/images/logo-skynet888.png" alt="Skynet888 logo">
             </a>
             <div class="nav-box-title my-auto">
-                <a href="index.php" id="site-title">SKYNET888</a>
+                <a href="index" id="site-title">SKYNET888</a>
                 <p id="site-desc" class="mb-0">Skynet888 website for all gamers</p>
             </div>
         </div>
@@ -48,8 +50,8 @@ echo '<div class="view-content">';
             <nav id="navbar-lg" class="navbar navbar-sub px-0">
                 <div id="navbarsub">
                     <ul class="navbar-nav flex-row">
-                        <li class="nav-item <?php echo (PAGE_NAME == 'index') ? 'active' : ''; ?>">
-                            <a class="nav-link" href="index">About Us</a>
+                        <li class="nav-item <?php echo (PAGE_NAME == 'about-us') ? 'active' : ''; ?>">
+                            <a class="nav-link" href="about-us">About Us</a>
                         </li>
                         <li class="nav-item <?php echo (PAGE_NAME == 'projects') ? 'active' : ''; ?>">
                             <a class="nav-link" href="projects">Projects</a>
