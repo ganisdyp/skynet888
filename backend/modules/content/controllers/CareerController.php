@@ -188,7 +188,10 @@ class CareerController extends Controller
                     $model->main_photo = $path;
                     $file->saveAs('uploads/career/' . $path);
                     if (isset($old_name)) {
-                        unlink('uploads/career/' . $old_name);
+                        if($old_name==''){
+
+                        }else{
+                        unlink('uploads/career/' . $old_name);}
                     } else {
                         // Do nothing
                     }
@@ -210,6 +213,7 @@ class CareerController extends Controller
                             $modelDetail->photo_url = $path;
                             ${'profile_file' . $c}->saveAs('uploads/career/related_photo/' . $path);
                             if (isset($old_name)) {
+
                                 unlink('uploads/career/related_photo/' . $old_name);
                             } else {
                                 // Do nothing
@@ -220,6 +224,10 @@ class CareerController extends Controller
 
                     }
                 }
+                Yii::$app->getSession()->setFlash('alert', [
+                    'body' => '<i class="fa fa-check"></i> Update Succesfully',
+                    'options' => ['class' => 'alert-success']
+                ]);
                 return $this->redirect(['update', 'id' => $model->id]);
             }
         }

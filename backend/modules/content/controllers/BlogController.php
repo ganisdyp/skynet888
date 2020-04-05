@@ -137,8 +137,11 @@ class BlogController extends Controller
                         $modelDetail->blog_id = $model->id;
                         $modelDetail->save();
                     }
-
-                    return $this->redirect(['view', 'id' => $model->id]);
+                    Yii::$app->getSession()->setFlash('alert', [
+                        'body' => '<i class="fa fa-check"></i> Update Succesfully',
+                        'options' => ['class' => 'alert-success']
+                    ]);
+                    return $this->redirect(['update', 'id' => $model->id]);
                 }
             }
             //return $this->redirect(['view', 'id' => $model->id]);
@@ -215,7 +218,10 @@ class BlogController extends Controller
                     $model->main_photo = $path;
                     $file->saveAs('uploads/blog/' . $path);
                     if (isset($old_name)) {
-                        unlink('uploads/blog/' . $old_name);
+                        if($old_name==''){
+
+                        }else{
+                        unlink('uploads/blog/' . $old_name);}
                     } else {
                         // Do nothing
                     }

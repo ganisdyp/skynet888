@@ -288,7 +288,7 @@ use dosamigos\tinymce\TinyMce;
                                         'options' => ['accept' => 'image/*'], 'pluginOptions' => [
                                             'showUpload' => false,
                                             'initialPreview' => [
-                                                ["www.safeboxasia.com/backend/uploads/blog/related_photo/$modelDetail->photo_url"]
+                                                [Yii::$app->request->BaseUrl."/uploads/blog/related_photo/$modelDetail->photo_url"]
                                             ],
                                             'initialPreviewAsData' => true,
                                             'initialCaption' => "$modelDetail->photo_url",

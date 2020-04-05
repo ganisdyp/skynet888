@@ -188,7 +188,11 @@ class ContactController extends Controller
                     $model->main_photo = $path;
                     $file->saveAs('uploads/contact/' . $path);
                     if (isset($old_name)) {
-                        unlink('uploads/contact/' . $old_name);
+                        if($old_name==''){
+
+                        }else {
+                            unlink('uploads/contact/' . $old_name);
+                        }
                     } else {
                         // Do nothing
                     }
@@ -210,6 +214,7 @@ class ContactController extends Controller
                             $modelDetail->photo_url = $path;
                             ${'profile_file' . $c}->saveAs('uploads/contact/related_photo/' . $path);
                             if (isset($old_name)) {
+
                                 unlink('uploads/contact/related_photo/' . $old_name);
                             } else {
                                 // Do nothing
@@ -220,6 +225,10 @@ class ContactController extends Controller
 
                     }
                 }
+                Yii::$app->getSession()->setFlash('alert', [
+                    'body' => '<i class="fa fa-check"></i> Update Succesfully',
+                    'options' => ['class' => 'alert-success']
+                ]);
                 return $this->redirect(['update', 'id' => $model->id]);
             }
         }

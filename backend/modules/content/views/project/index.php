@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use fedemotta\datatables\DataTables;
+
 /* @var $this yii\web\View */
 /* @var $searchModel backend\modules\content\models\ProjectSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -26,12 +27,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-          //  'id',
             ['attribute' => 'main_photo',
                 'format' => 'html',
                 'value' => function ($dataProvider) {
-                    return Html::img(Yii::$app->getHomeUrl().'uploads/project/' . $dataProvider->main_photo,
-                        ['class'=>'thumbnail','width'=>'80']);
+                    return Html::img(Yii::$app->getHomeUrl() . 'uploads/project/' . $dataProvider->main_photo,
+                        ['class' => 'thumbnail', 'width' => '80']);
                 }
             ],
             [
@@ -49,7 +49,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'label' => 'Name (TH)',
             ],
-
+            [
+                'attribute' => 'status',
+                'format' => 'html',
+                'value' => function ($dataProvider) {
+                    return Yii::$app->project->getProjectStatus($dataProvider->status);
+                }
+            ],
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

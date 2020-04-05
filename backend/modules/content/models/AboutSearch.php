@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use common\models\About;
 
 /**
- * HomeContentSearch represents the model behind the search form of `common\models\HomeContent`.
+ * AboutSearch represents the model behind the search form of `common\models\About`.
  */
 class AboutSearch extends About
 {

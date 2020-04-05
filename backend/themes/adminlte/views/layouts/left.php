@@ -39,6 +39,12 @@
                         'url' => '#',
                         'items' => [
                             [
+                                'label' => 'Index',
+                                'icon' => 'home',
+                                'url' => ['/content/home/update?id=1'],
+
+                            ],
+                            [
                                 'label' => 'About Us',
                                 'icon' => 'commenting',
                                 'url' => ['/content/about/update?id=1'],
@@ -50,6 +56,12 @@
                                 'icon' => 'file-o',
                                 'url' => '#',
                                 'items' => [
+                                    [
+                                        'label' => 'Project Overview',
+                                        'icon' => 'file-o',
+                                        'url' => ['/content/projectov/update?id=1'],
+
+                                    ],
                                     ['label' => 'Manage project', 'icon' => 'reorder', 'url' => Yii::$app->getHomeUrl() . 'content/project/index'],
                                         ['label' => 'Story', 'icon' => 'file', 'url' => Yii::$app->getHomeUrl() . 'content/story/index'],
                                     ['label' => 'Characters', 'icon' => 'group', 'url' => Yii::$app->getHomeUrl() . 'content/character/index'],
@@ -62,7 +74,7 @@
                                 'active' => true,
                                 'label' => 'News',
                                 'icon' => 'bullhorn',
-                                'url' => Yii::$app->getHomeUrl() . 'content/blog/index',
+                                'url' => Yii::$app->getHomeUrl() . 'content/blog/update?id=1',
                             ],
                             [
                                 'label' => 'Career',

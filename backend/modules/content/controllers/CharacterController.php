@@ -194,7 +194,11 @@ class CharacterController extends Controller
                     $model->main_photo = $path;
                     $file->saveAs('uploads/character/' . $path);
                     if (isset($old_name)) {
+                        if($old_name==''){
+
+                        }else{
                         unlink('uploads/character/' . $old_name);
+                        }
                     } else {
                         // Do nothing
                     }
@@ -350,5 +354,31 @@ class CharacterController extends Controller
         throw new NotFoundHttpException(Yii::t('backend', 'The requested page does not exist.'));
     }
 
+    function actionLoadcharacter()
+    {
+
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();;
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $out = [];
+            if (isset($data['project_id'])) {
+                $project_id = $data['project_id'];
+                $searchModel_character = new CharacterSearch();
+                $dataProvider_character = $searchModel_character->search(Yii::$app->request->queryParams);
+                $characters = $dataProvider_character->query->where(['project_id' => $project_id])->all();
+                if (isset($characters)) {
+                    foreach ($characters as $character) {
+
+                        $out[] = $character->id.' ||| '.$character->main_photo;
+                    }
+                } else {
+                    $characters = null;
+                    $out[] = $characters;
+                }
+
+            }
+            return $out;
+        }
+    }
 
 }

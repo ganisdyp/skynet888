@@ -193,8 +193,10 @@ class MovieController extends Controller
                     $path = $unique_name . ".{$file->extension}";
                     $model->main_photo = $path;
                     $file->saveAs('uploads/movie/' . $path);
-                    if (isset($old_name)) {
-                        unlink('uploads/movie/' . $old_name);
+                    if (isset($old_name)) {if($old_name==''){
+
+                    }else{
+                        unlink('uploads/movie/' . $old_name);}
                     } else {
                         // Do nothing
                     }
@@ -350,5 +352,31 @@ class MovieController extends Controller
         throw new NotFoundHttpException(Yii::t('backend', 'The requested page does not exist.'));
     }
 
+    function actionLoadmovie()
+    {
+
+        if (Yii::$app->request->isAjax) {
+            $data = Yii::$app->request->post();;
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            $out = [];
+            if (isset($data['project_id'])) {
+                $project_id = $data['project_id'];
+                $searchModel_movie = new MovieSearch();
+                $dataProvider_movie = $searchModel_movie->search(Yii::$app->request->queryParams);
+                $movies = $dataProvider_movie->query->where(['project_id' => $project_id])->all();
+                if (isset($movies)) {
+                    foreach ($movies as $movie) {
+
+                        $out[] = $movie->id.' ||| '.$movie->main_photo.' |x| '.$movie->name;
+                    }
+                } else {
+                    $movies = null;
+                    $out[] = $movies;
+                }
+
+            }
+            return $out;
+        }
+    }
 
 }

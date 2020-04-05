@@ -78,6 +78,7 @@ class SiteController extends Controller
             'name' => 'description',
             'content' => 'Safe Box Siam is a new company that aims at providing high quality safes and technical services to its clients. We will also be the one stop office solution to your business by providing a full comprehensive range of equipments'
         ]);
+        $this->view->title = 'Skynet888Studios';
 
         return $this->render('index');
     }
@@ -139,25 +140,22 @@ class SiteController extends Controller
                ]);
            }
        }*/
-    public function actionContact()
+    public function actionAboutUs()
     {
-        $model = new ContactForm();
+        $this->view->title = 'About Us';
+        return $this->render('about-us');
+    }
+    public function actionContactUs()
+    {
+        $this->view->title = 'Contact Us';
+            return $this->render('contact-us');
+    }
 
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+    public function actionCareers()
+    {
+        $this->view->title = 'Careers';
+        return $this->render('careers');
 
-            if ($model->sendEmail('safeboxsiam@gmail.com') && $model->sendEmail('info@safeboxasia.com')) {
-                Yii::$app->session->setFlash('successContact');
-                return $this->refresh();
-            } else {
-                //   echo 'ERROR!';
-                Yii::$app->session->setFlash('errorContact');
-                return $this->refresh();
-            }
-        } else {
-            return $this->render('contact', [
-                'model' => $model
-            ]);
-        }
     }
     public function actionEnquiry()
     {
@@ -179,25 +177,7 @@ class SiteController extends Controller
             ]);
         }
     }
-    /**
-     * Displays about page.
-     *
-     * @return mixed
-     */
-    public function actionAbout()
-    {
-        return $this->render('about');
-    }
 
-    /**
-     * Displays services page.
-     *
-     * @return mixed
-     */
-    public function actionServices()
-    {
-        return $this->render('services');
-    }
 
     /**
      * Displays character categories page.
@@ -210,13 +190,25 @@ class SiteController extends Controller
     }
 
     /**
-     * Displays character list page.
+     * Displays project list page.
      *
      * @return mixed
      */
-    public function actionCharacterList()
+    public function actionProjects()
     {
-        return $this->render('characterList');
+        $this->view->title = 'Projects';
+        return $this->render('project-list');
+    }
+
+    /**
+     * Displays project detail page.
+     *
+     * @return mixed
+     */
+    public function actionProjectDetail()
+    {
+        $this->view->title = 'Project Details';
+        return $this->render('project-detail');
     }
 
     /**
@@ -236,7 +228,7 @@ class SiteController extends Controller
      */
     public function actionCharacterView()
     {
-        return $this->render('productView');
+        return $this->render('characterView');
     }
 
     /**
@@ -244,30 +236,12 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionBlogCategory()
+    public function actionNews()
     {
-        return $this->render('blogCategory');
+        $this->view->title = 'News';
+        return $this->render('news');
     }
 
-    /**
-     * Displays study trip list page.
-     *
-     * @return mixed
-     */
-    public function actionBlogList()
-    {
-        return $this->render('blogList');
-    }
-
-    /**
-     * Displays study trip list page.
-     *
-     * @return mixed
-     */
-    public function actionBlogView()
-    {
-        return $this->render('blogView');
-    }
 
     /**
      * Signs user up.

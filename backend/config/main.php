@@ -27,7 +27,9 @@ return [
       /*  'request' => [
             'csrfParam' => '_csrf-backend',
         ],*/
-    
+        'project' => [
+            'class' => 'backend\modules\content\components\Projectstatus',
+        ],
         'request' => [
             'baseUrl' => $baseUrl,
             'enableCsrfValidation' => false,
@@ -75,5 +77,6 @@ return [
 
 
     ],
+
     //'params' => $params,
 ];

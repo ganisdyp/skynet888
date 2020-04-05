@@ -19,7 +19,7 @@ class ProjectSearch extends Project
     {
         return [
             [['id'], 'integer'],
-            [['code', 'main_photo'], 'safe'],
+            [[ 'main_photo','status'], 'safe'],
         ];
     }
 
@@ -62,8 +62,8 @@ class ProjectSearch extends Project
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'code', $this->code])
-            ->andFilterWhere(['like', 'main_photo', $this->main_photo]);
+        $query->andFilterWhere(['like', 'main_photo', $this->main_photo])
+        ->andFilterWhere(['like', 'status', $this->status]);
 
         return $dataProvider;
     }
